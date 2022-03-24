@@ -63,3 +63,7 @@
 .headerText{
     text-align: left;
 }
+
+.tabs{
+    display: flex;
+}

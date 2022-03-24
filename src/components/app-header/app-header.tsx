@@ -3,7 +3,7 @@ import styles from './app-header.module.css';
 
 const AppHeader = () => {
     return (
-        <header style={{ backgroundColor: '#1C1C21' }} className="p-4">
+        <header className={`p-4 ${styles.header}`}>
             <div className={styles.container}>
                 <div className={styles.linksContainer}>
                     <a className={`p-4 ${styles.headerConstructor}`}>
