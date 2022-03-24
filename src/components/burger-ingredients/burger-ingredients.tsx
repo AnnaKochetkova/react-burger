@@ -14,13 +14,13 @@ const BurgerIngredients = () => {
             </p>
             <div style={{ display: 'flex' }}>
                 <Tab value="one" active={current === 'one'} onClick={setCurrent}>
-                    One
+                    Булки
                 </Tab>
                 <Tab value="two" active={current === 'two'} onClick={setCurrent}>
-                    Two
+                    Соусы
                 </Tab>
                 <Tab value="three" active={current === 'three'} onClick={setCurrent}>
-                    Three
+                    Начинки
                 </Tab>
             </div>
             <div className={styles.allIngredients}>
@@ -30,7 +30,7 @@ const BurgerIngredients = () => {
                         data.map(el => {
                             if (el.type === "bun") {
                                 return (
-                                    <Ingredient name={el.name} image={el.image} />
+                                    <Ingredient key={el._id} name={el.name} image={el.image} />
                                 )
                             }
                         })
@@ -42,19 +42,19 @@ const BurgerIngredients = () => {
                         data.map(el => {
                             if (el.type === "sauce") {
                                 return (
-                                    <Ingredient name={el.name} image={el.image} />
+                                    <Ingredient key={el._id} name={el.name} image={el.image} />
                                 )
                             }
                         })
                     }
                 </div>
-                <p className={`text text_type_main-medium mt-10 mb-5 ${styles.headerText}`}>Основные</p>
+                <p className={`text text_type_main-medium mt-10 mb-5 ${styles.headerText}`}>Начинки</p>
                 <div className={styles.ingredientsCategory}>
                     {
                         data.map(el => {
                             if (el.type === "main") {
                                 return (
-                                    <Ingredient name={el.name} image={el.image} />
+                                    <Ingredient key={el._id} name={el.name} image={el.image} />
                                 )
                             }
                         })

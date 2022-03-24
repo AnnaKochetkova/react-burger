@@ -9,7 +9,7 @@ const Ingredient = (props: IIngredientProps) => {
     return (
         <div className={styles.ingredient}>
             <Counter count={1} size="default" >1</Counter>
-            <img src={props.image} alt="" />
+            <img src={props.image} alt={props.name} />
             <p className={`text text_type_digits-default mt-1 mb-1 ${styles.price}`}>
                 20
                 <CurrencyIcon type="primary" />

@@ -21,7 +21,7 @@ const BurgerConstructor = () => {
                         data.map(el => 
                         {
                             if(el.type !== "bun" && el.type !== "sauce"){
-                                return <ConstructorIngredients name={el.name} image={el.image}/>
+                                return <ConstructorIngredients key={el._id} name={el.name} image={el.image}/>
                             }
                             
                         })
