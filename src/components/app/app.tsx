@@ -9,7 +9,7 @@ function App() {
   return (
     <div className="App">
       <AppHeader/>
-      <main className={styles.main} style={{width: 1220, display: 'flex', justifyContent: 'space-between', margin: '0 auto'}}>
+      <main className={styles.main}>
           <BurgerIngredients/>
           <BurgerConstructor/>
       </main>
