@@ -2,6 +2,13 @@
   text-align: center;
 }
 
+.main{
+  width: 1220px; 
+  display: flex; 
+  justify-content: space-between;
+  margin: 0 auto;
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
