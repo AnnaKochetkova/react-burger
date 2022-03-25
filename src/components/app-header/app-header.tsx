@@ -10,7 +10,7 @@ const AppHeader = () => {
                         <BurgerIcon type="primary" />
                         <span className={`ml-2 ${styles.text}`}>Конструктор</span>
                     </a>
-                    <a className={`p-4 ml-2 ${styles.headerConstructor}`} style={{opacity: '50%'}}>
+                    <a className={`p-4 ml-2 ${styles.headerConstructor} ${styles.opacity}`}>
                         <ListIcon type="primary" />
                         <span className={`ml-2 ${styles.text}`}>Лента заказов</span>
                     </a>
