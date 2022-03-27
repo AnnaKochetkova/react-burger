@@ -1,0 +1,108 @@
+.modalContainer{
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.overlay{
+    width: 100vw;
+    height: 100vh;
+    background-color: #00000099;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+
+.modal{
+    width: 720px;
+    min-height: 539px;
+    max-height: 719px;
+    display: flex;
+    z-index: 1001;
+    flex-direction: column;
+    align-items: center;
+    background: #1C1C21;
+    margin: auto;
+
+    border: 1px solid rgba(76, 76, 255, 0.2);
+    box-sizing: border-box;
+
+    box-shadow: 0px 24px 32px rgba(0, 0, 0, 0.04), 0px 16px 24px rgba(0, 0, 0, 0.04), 0px 4px 8px rgba(0, 0, 0, 0.04), 0px 0px 1px rgba(0, 0, 0, 0.04);
+    border-radius: 40px;
+    
+}
+
+.image{
+    width: 24px;
+    height: 24px;
+}
+
+.modalHeader{
+    width: 720px;
+    /* height: 718px;
+     */
+}
+
+.headerContent{
+    width: 640px;
+    height: 64px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.button{
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    margin-left: auto;
+}
+
+.order{
+    width: 520px;
+    height: 478px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.orderImg{
+    width: 120px;
+    height: 120px;
+}
+
+.wrapperIngredient{
+    width: 520px;
+    height: 374px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.containerValues{
+    width: 516px;
+    height: 56px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.values{
+    height: 56px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.imageIngredient{
+    width: 480px;
+    height: 240px;
+}

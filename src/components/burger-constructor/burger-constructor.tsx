@@ -1,9 +1,42 @@
+import { useCallback } from 'react';
+import { useState, useEffect } from 'react';
 import styles from './burger-constructor.module.css';
 import { ConstructorElement, Button, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import data from '../../utils/data';
 import ConstructorIngredients from './constructor-ingredients';
 
-const BurgerConstructor = () => {
+interface IBurgerConstructorProps {
+    onOpen: ()=>void;
+}
+
+interface IListItem {
+    type: "bun" |"sauce" | "main";
+    _id: string;
+    name: string;
+    image: string;
+    price: number;
+}
+
+const BurgerConstructor = (props: IBurgerConstructorProps) => {
+
+    const {onOpen} = props;
+
+    const url = 'https://norma.nomoreparties.space/api/ingredients';
+    const [list, setList] = useState<IListItem[]>([]);
+    const request = useCallback(async () => {
+        try {
+            let response = await fetch(url);
+            let result = await response.json();
+            setList(result.data);
+        } catch (error) {
+            console.log(error);
+        }
+
+    }, []);
+    useEffect(() => {
+        request()
+    }, [request])
+
     return (
         <div className={styles.container}>
             <div className={styles.wrapper}>
@@ -18,10 +51,10 @@ const BurgerConstructor = () => {
                 </div>
                 <div className={styles.ingredients}>
                     {
-                        data.map(el => 
+                        list.map(el => 
                         {
                             if(el.type !== "bun" && el.type !== "sauce"){
-                                return <ConstructorIngredients key={el._id} name={el.name} image={el.image}/>
+                                return <ConstructorIngredients key={el._id} name={el.name} image={el.image} price={el.price}/>
                             }
                             
                         })
@@ -43,7 +76,7 @@ const BurgerConstructor = () => {
                     610
                     <CurrencyIcon type="primary" />
                 </span>
-                <Button type="primary" size="large">
+                <Button type="primary" size="large" onClick={onOpen} >
                     Оформить заказ
                 </Button>
             </div>

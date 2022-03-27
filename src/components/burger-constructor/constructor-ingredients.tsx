@@ -4,6 +4,8 @@ import styles from './burger-constructor.module.css';
 interface IIngredientProps {
     image: string;
     name: string;
+    price: number;
+    
 }
 const ConstructorIngredients = (props: IIngredientProps) => {
     return (
@@ -11,7 +13,7 @@ const ConstructorIngredients = (props: IIngredientProps) => {
             <DragIcon type="primary" />
             <ConstructorElement
                 text={props.name}
-                price={50}
+                price={props.price}
                 thumbnail={props.image}
             />
         </div>
