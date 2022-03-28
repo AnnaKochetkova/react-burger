@@ -37,6 +37,10 @@
     height: 208px;
     position: relative;
     cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .price{
@@ -56,6 +60,7 @@
 .name{
     width: 272px;
     height: 48px;
+    text-align: center;
 }
 
 .ingredientsCategory{

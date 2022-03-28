@@ -1,41 +1,15 @@
-import { useCallback } from 'react';
-import { useState, useEffect } from 'react';
 import styles from './burger-constructor.module.css';
 import { ConstructorElement, Button, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
-import data from '../../utils/data';
 import ConstructorIngredients from './constructor-ingredients';
 
 interface IBurgerConstructorProps {
     onOpen: ()=>void;
-}
-
-interface IListItem {
-    type: "bun" |"sauce" | "main";
-    _id: string;
-    name: string;
-    image: string;
-    price: number;
+    list: any[];
 }
 
 const BurgerConstructor = (props: IBurgerConstructorProps) => {
 
     const {onOpen} = props;
-
-    const url = 'https://norma.nomoreparties.space/api/ingredients';
-    const [list, setList] = useState<IListItem[]>([]);
-    const request = useCallback(async () => {
-        try {
-            let response = await fetch(url);
-            let result = await response.json();
-            setList(result.data);
-        } catch (error) {
-            console.log(error);
-        }
-
-    }, []);
-    useEffect(() => {
-        request()
-    }, [request])
 
     return (
         <div className={styles.container}>
@@ -51,7 +25,7 @@ const BurgerConstructor = (props: IBurgerConstructorProps) => {
                 </div>
                 <div className={styles.ingredients}>
                     {
-                        list.map(el => 
+                        props.list.map(el => 
                         {
                             if(el.type !== "bun" && el.type !== "sauce"){
                                 return <ConstructorIngredients key={el._id} name={el.name} image={el.image} price={el.price}/>

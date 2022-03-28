@@ -1,4 +1,4 @@
-import styles from './modal.module.css';
+import styles from './order-details.module.css';
 import order from '../../images/order.png';
 
 const OrderDetails = () => {

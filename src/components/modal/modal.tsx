@@ -1,7 +1,7 @@
 import { createPortal } from "react-dom";
 import {IModalHeaderProps } from './modal-header';
 import ModalHeader from "./modal-header";
-import ModalOverlay from "./modal-overlay";
+import ModalOverlay from "../modal-overlay/modal-overlay";
 import styles from './modal.module.css';
 import { useEffect } from "react";
 
@@ -16,14 +16,14 @@ const Modal = (props: IModalProps) => {
     const { children, header, onClose, open } = props;
 
     useEffect(() => {
-        const handlerEvent = (e: KeyboardEvent) => {
+        const handlerEventOnEsc = (e: KeyboardEvent) => {
             if(e.key === "Escape") {
                 onClose();
             }
         };
-        window.addEventListener('keydown', handlerEvent);
+        window.addEventListener('keydown', handlerEventOnEsc);
         return () => {
-            window.removeEventListener('keydown', handlerEvent);
+            window.removeEventListener('keydown', handlerEventOnEsc);
         }
     }, [])
 
@@ -36,7 +36,7 @@ const Modal = (props: IModalProps) => {
             body[0].removeAttribute('style')
         }
     }, [open]);
-    if(open === false && modalRoot !== null) return null;
+    if(!open && modalRoot !== null) return null;
 
     return createPortal(
       <div className={styles.modalContainer}>

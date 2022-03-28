@@ -12,8 +12,8 @@ const Ingredient = (props: IIngredientProps) => {
         <div className={styles.ingredient} onClick={props.onClick}>
             <Counter count={1} size="default" >1</Counter>
             <img src={props.image} alt={props.name} />
-            <div className={styles.wrapperPrice}>
-                <p className={`text text_type_digits-default mt-1 mb-1 pr-2 ${styles.price}`}>
+            <div className={`${styles.wrapperPrice} mt-1 mb-1`}>
+                <p className={`text text_type_digits-default  pr-2 ${styles.price}`}>
                     {props.price}
                 </p>
                 <CurrencyIcon type="primary" />
