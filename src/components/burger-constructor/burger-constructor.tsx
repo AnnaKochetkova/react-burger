@@ -1,9 +1,16 @@
 import styles from './burger-constructor.module.css';
 import { ConstructorElement, Button, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
-import data from '../../utils/data';
 import ConstructorIngredients from './constructor-ingredients';
 
-const BurgerConstructor = () => {
+interface IBurgerConstructorProps {
+    onOpen: ()=>void;
+    list: any[];
+}
+
+const BurgerConstructor = (props: IBurgerConstructorProps) => {
+
+    const {onOpen} = props;
+
     return (
         <div className={styles.container}>
             <div className={styles.wrapper}>
@@ -18,10 +25,10 @@ const BurgerConstructor = () => {
                 </div>
                 <div className={styles.ingredients}>
                     {
-                        data.map(el => 
+                        props.list.map(el => 
                         {
                             if(el.type !== "bun" && el.type !== "sauce"){
-                                return <ConstructorIngredients key={el._id} name={el.name} image={el.image}/>
+                                return <ConstructorIngredients key={el._id} name={el.name} image={el.image} price={el.price}/>
                             }
                             
                         })
@@ -43,7 +50,7 @@ const BurgerConstructor = () => {
                     610
                     <CurrencyIcon type="primary" />
                 </span>
-                <Button type="primary" size="large">
+                <Button type="primary" size="large" onClick={onOpen} >
                     Оформить заказ
                 </Button>
             </div>

@@ -1,0 +1,28 @@
+.wrapperIngredient{
+    width: 520px;
+    height: 374px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.imageIngredient{
+    width: 480px;
+    height: 240px;
+}
+
+.containerValues{
+    width: 516px;
+    height: 56px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.values{
+    height: 56px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}

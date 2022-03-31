@@ -36,13 +36,22 @@
     width: 272px;
     height: 208px;
     position: relative;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .price{
-    width: 62px;
+    height: 24px;
+}
+
+.wrapperPrice{
+    width: 100px;
     height: 24px;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     margin-left: auto;
     margin-right: auto;
@@ -51,6 +60,7 @@
 .name{
     width: 272px;
     height: 48px;
+    text-align: center;
 }
 
 .ingredientsCategory{
