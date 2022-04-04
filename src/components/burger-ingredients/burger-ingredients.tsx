@@ -3,11 +3,11 @@ import styles from './burger-ingredients.module.css';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import Ingredient from './ingredient';
 import { groupBy } from '../../utils/group-by';
-import { ContextIngredients, enumIngredientType } from '../app/contextIngredients';
+import { ContextIngredients, EIngredientType } from '../app/contextIngredients';
 
 
 export interface IListItemIngredient {
-    type: enumIngredientType;
+    type: EIngredientType;
     _id: string;
     name: string;
     image: string;

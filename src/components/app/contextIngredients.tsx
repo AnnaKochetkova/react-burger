@@ -1,7 +1,8 @@
 import { createContext, useEffect, useReducer, useCallback } from "react";
+import api from "../../utils/api";
 import { IListItemIngredient } from '../burger-ingredients/burger-ingredients';
 
-export enum enumIngredientType {
+export enum EIngredientType {
     bun = "bun",
     sauce = "sauce",
     main = "main",
@@ -87,7 +88,6 @@ function reducer(state: IStore, action: IAction): IStore {
 }
 
 export function ProviderIngredients({ children }: IProviderIngredientsProps) {
-    const url = 'https://norma.nomoreparties.space/api/ingredients';
     const [storeIngredients, ingredientsDispatcher] = useReducer(reducer, initialStore);
 
     const createOrder = useCallback(async () => {
@@ -96,16 +96,8 @@ export function ProviderIngredients({ children }: IProviderIngredientsProps) {
         const idBuns = storeIngredients.bun !== undefined ? [storeIngredients.bun._id, storeIngredients.bun._id] : [];
         const idAllIngredients = idIngredients.concat(idBuns);
 
-        const request = await fetch('https://norma.nomoreparties.space/api/orders', {
-            method: 'post',
-            headers: {
-                'Content-Type': 'application/json;charset=utf-8'
-            },
-            body: JSON.stringify({
-                "ingredients": idAllIngredients
-            })
-        })
-        let result = await request.json();
+        
+        let result = await api.getOrder(idAllIngredients);
         ingredientsDispatcher({type: 'setOrderNumber', payload: result.order.number})
 
     }, [storeIngredients])
@@ -113,8 +105,8 @@ export function ProviderIngredients({ children }: IProviderIngredientsProps) {
     useEffect(() => {
         (async function () {
             try {
-                let response = await fetch(url);
-                let result = await response.json();
+                
+                let result = await api.getAllIngredients();
                 ingredientsDispatcher({ type: 'init', payload: result.data });
                 ingredientsDispatcher({ type: 'setIngredientsConstructor', payload: result.data.filter((el: IListItemIngredient) => el.type !== 'bun') });
                 const bunConstructor = result.data.find((el: IListItemIngredient) => el.type === 'bun')
@@ -125,9 +117,9 @@ export function ProviderIngredients({ children }: IProviderIngredientsProps) {
 
         }())
     }, [])
-    return <ContextIngredients.Provider value={storeIngredients}>
-        <IngredientsAPI.Provider value={{ createOrder }}>
-            {children}
-        </IngredientsAPI.Provider>
-    </ContextIngredients.Provider>
+    return  <ContextIngredients.Provider value={storeIngredients}>
+                <IngredientsAPI.Provider value={{ createOrder }}>
+                    {children}
+                </IngredientsAPI.Provider>
+            </ContextIngredients.Provider>
 }
