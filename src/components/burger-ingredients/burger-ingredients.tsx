@@ -3,14 +3,13 @@ import styles from './burger-ingredients.module.css';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import Ingredient from './ingredient';
 import { groupBy } from '../../utils/group-by';
-import { EIngredientType } from '../app/contextIngredients';
 import { useSelector, useDispatch } from 'react-redux';
 import { getIngredients } from '../../services/actions/ingredients';
 import { RootState } from '../../services/logic/rootReducer';
 
 
 export interface IListItemIngredient {
-    type: EIngredientType;
+    type: 'bun' | 'sause' | 'main';
     _id: string;
     name: string;
     image: string;

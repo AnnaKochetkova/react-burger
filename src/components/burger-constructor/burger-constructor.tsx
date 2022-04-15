@@ -10,6 +10,9 @@ import { useDrop } from 'react-dnd';
 import { UPDATE_CONSTRUCTOR } from '../../services/actions/constructor-ingredients';
 import { RootState } from '../../services/logic/rootReducer';
 import ConstructorElementIngredient from './constructor-element-ingredient';
+import { IConstructorIngredientsDND } from '../../services/actions/constructor-ingredients';
+import { UPDATE_CONSTRUCTOR_INGREDIENTS } from '../../services/actions/constructor-ingredients';
+import { v4 as uuidv4 } from 'uuid';
 
 interface IBurgerConstructorProps {
     onOpen: ()=>void;
@@ -18,11 +21,9 @@ interface IBurgerConstructorProps {
 const BurgerConstructor = (props: IBurgerConstructorProps) => {
     const dispatch = useDispatch();
 
-    
-
     const bun = useSelector((store: RootState) => store.constructor.buns);
     
-    const amount = useSelector((store: RootState) => store.constructor.amount)
+    const amount = useSelector((store: RootState) => store.constructor.amount);
     
     const {onOpen} = props;
 
@@ -35,9 +36,10 @@ const BurgerConstructor = (props: IBurgerConstructorProps) => {
           isHover: monitor.isOver()
         }),
         drop(item) {
-            const ing = item as IListItemIngredient;
+            const ing = item as IConstructorIngredientsDND;
+            const uuid = uuidv4();
             if (ing.type !== 'bun'){
-                dispatch(setConstructorIngredients(ing));
+                dispatch(setConstructorIngredients({...ing, uuid}));
             }
         }
     });
@@ -49,9 +51,10 @@ const BurgerConstructor = (props: IBurgerConstructorProps) => {
           isOver: monitor.isOver()
         }),
         drop(item) {
-            const bun = item as IListItemIngredient;
+            const bun = item as IConstructorIngredientsDND;
             if (bun.type === 'bun'){
                 dispatch(setConstructorBuns(bun));
+
             }
         }
     });
@@ -91,7 +94,7 @@ const BurgerConstructor = (props: IBurgerConstructorProps) => {
                     constructorIngredients && 
                         constructorIngredients.map((el, index) => {
                             return (
-                                <ConstructorElementIngredient key={`${el._id}-${index}`} index={index} el={el} moveCard={moveCard}/>
+                                <ConstructorElementIngredient key={el.uuid} index={index} el={el} moveCard={moveCard}/> //key={`${el._id}-${index}`}
                             )
                         })
                     }

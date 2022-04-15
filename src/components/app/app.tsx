@@ -6,7 +6,6 @@ import styles from './app.module.css';
 import Modal from '../modal/modal';
 import OrderDetails from '../order-details/order-details';
 import IngredientDetails from '../Ingredient-details/Ingredient-details';
-import { ProviderIngredients } from './contextIngredients';
 import { DndProvider } from 'react-dnd'
 import { HTML5Backend } from 'react-dnd-html5-backend';
 
@@ -29,7 +28,7 @@ function App() {
   }
 
   return (
-    <ProviderIngredients >
+    
     <div className="App">
       
         <AppHeader/>
@@ -47,7 +46,7 @@ function App() {
         </main>
       
     </div>
-    </ProviderIngredients>
+    
   );
 }
 

@@ -1,4 +1,4 @@
-const url = 'https://norma.nomoreparties.space/api/';
+export const baseUrl = 'https://norma.nomoreparties.space/api/';
 
 const checkResponse = (res: Response) => {
     if (!res.ok) {
@@ -7,7 +7,7 @@ const checkResponse = (res: Response) => {
 }
 
 const getOrder = async function(idAllIngredients: string[]) {
-    const request = await fetch(`${url}orders`, {
+    const request = await fetch(`${baseUrl}orders`, {
             method: 'post',
             headers: {
                 'Content-Type': 'application/json;charset=utf-8'
@@ -22,7 +22,7 @@ const getOrder = async function(idAllIngredients: string[]) {
 
 const getAllIngredients = async function() {
 
-    let response = await fetch(`${url}ingredients`);
+    let response = await fetch(`${baseUrl}ingredients`);
     checkResponse(response);
     return await response.json();
 }

@@ -1,4 +1,5 @@
 import {IAction} from '../reducers/ingredients';
+import api from '../../utils/api';
 
 export enum ETypeActions {
     GET_ALL_INGREDIENTS_REQUEST = 'GET_ALL_INGREDIENTS_REQUEST',
@@ -15,10 +16,6 @@ export enum ETypeActions {
     GET_ORDER_ERROR = 'GET_ORDER_ERROR',
 }
 
-// type IDispatch =  (arg0: IAction) => IAction;
-
-const url = 'https://norma.nomoreparties.space/api/';
-
 export const GET_ALL_INGREDIENTS_REQUEST = 'GET_ALL_INGREDIENTS_REQUEST';
 export const GET_ALL_INGREDIENTS_SUCCESS = 'GET_ALL_INGREDIENTS_SUCCESS';
 export const GET_ALL_INGREDIENTS_ERROR = 'GET_ALL_INGREDIENTS_ERROR';
@@ -28,18 +25,19 @@ export const getIngredients = () => {
         dispatch({
             type: ETypeActions.GET_ALL_INGREDIENTS_REQUEST
         })
-        let response = await fetch(`${url}ingredients`);
-        if (!response.ok) {
+        try {
+            const result = await api.getAllIngredients()
             dispatch({
-                type: ETypeActions.GET_ALL_INGREDIENTS_ERROR
+                type: ETypeActions.GET_ALL_INGREDIENTS_SUCCESS,
+                ingredients: result.data,
             })
-            throw new Error('Ответ сети был не ok.');
+        } catch (error) {
+            dispatch({
+                type: ETypeActions.GET_ALL_INGREDIENTS_ERROR,
+            })
         }
-        const result =  await response.json();
-        dispatch({
-            type: ETypeActions.GET_ALL_INGREDIENTS_SUCCESS,
-            ingredients: result.data,
-        })
+
+
     }
 }
 
