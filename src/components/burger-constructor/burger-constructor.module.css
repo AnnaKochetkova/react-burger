@@ -26,6 +26,14 @@
     scrollbar-color: #8585AD #2F2F37;
 }
 
+.hover{
+    box-shadow: 0px 0px 15px #7661c2;
+}
+
+.hoverBun{
+    box-shadow: 0px 0px 15px #7661c2;
+}
+
 .ingredients::-webkit-scrollbar{
     width: 10px;
 }

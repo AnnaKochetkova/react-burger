@@ -6,7 +6,8 @@ import styles from './app.module.css';
 import Modal from '../modal/modal';
 import OrderDetails from '../order-details/order-details';
 import IngredientDetails from '../Ingredient-details/Ingredient-details';
-import { ProviderIngredients } from './contextIngredients';
+import { DndProvider } from 'react-dnd'
+import { HTML5Backend } from 'react-dnd-html5-backend';
 
 function App() {
   const [openOrder, setOpenOrder] = useState<boolean>(false);
@@ -27,13 +28,15 @@ function App() {
   }
 
   return (
-    <ProviderIngredients >
+    
     <div className="App">
       
         <AppHeader/>
         <main className={styles.main}>
+          <DndProvider backend={HTML5Backend}>
             <BurgerIngredients onOpen={onOpenDetails}/>
             <BurgerConstructor onOpen={onOpenOrder} />
+          </DndProvider>
             <Modal header={<></>} open={openOrder} onClose={onClose}> 
                 <OrderDetails/>
             </Modal>
@@ -43,7 +46,7 @@ function App() {
         </main>
       
     </div>
-    </ProviderIngredients>
+    
   );
 }
 

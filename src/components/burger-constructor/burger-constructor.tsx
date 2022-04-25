@@ -1,74 +1,114 @@
-import { useContext } from 'react';
-import { ContextIngredients, IngredientsAPI } from '../app/contextIngredients';
+import { useCallback } from 'react';
 import styles from './burger-constructor.module.css';
-import { ConstructorElement, Button, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
-import ConstructorIngredients from './constructor-ingredients';
-import { useState } from 'react';
+import { Button, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
+import { useDispatch, useSelector } from 'react-redux';
+import { getOrderNumber } from '../../services/actions/order';
+import { setConstructorIngredients, setConstructorBuns } from '../../services/actions/constructor-ingredients';
+import { IListItemIngredient } from '../burger-ingredients/burger-ingredients';
+import ConstructorBuns from './constructor-buns';
+import { useDrop } from 'react-dnd';
+import { UPDATE_CONSTRUCTOR } from '../../services/actions/constructor-ingredients';
+import { RootState } from '../../services/logic/rootReducer';
+import ConstructorElementIngredient from './constructor-element-ingredient';
+import { IConstructorIngredientsDND } from '../../services/actions/constructor-ingredients';
+import { UPDATE_CONSTRUCTOR_INGREDIENTS } from '../../services/actions/constructor-ingredients';
+import { v4 as uuidv4 } from 'uuid';
 
 interface IBurgerConstructorProps {
     onOpen: ()=>void;
 }
 
 const BurgerConstructor = (props: IBurgerConstructorProps) => {
+    const dispatch = useDispatch();
 
-    const {ingredientsConstructor, amount, bun} = useContext(ContextIngredients);
-    const {createOrder} = useContext(IngredientsAPI);
+    const bun = useSelector((store: RootState) => store.constructor.buns);
+    
+    const amount = useSelector((store: RootState) => store.constructor.amount);
     
     const {onOpen} = props;
 
-    const handleCreateOrder = async() => {
-        await createOrder();
-        onOpen();
+    const constructorIngredients = useSelector((store: RootState) => store.constructor.ingredientsConstructor)
+
+    const [{ isHover }, dropTargerRef] = useDrop({
+
+        accept: 'ingredient',
+        collect: monitor => ({
+          isHover: monitor.isOver()
+        }),
+        drop(item) {
+            const ing = item as IConstructorIngredientsDND;
+            const uuid = uuidv4();
+            if (ing.type !== 'bun'){
+                dispatch(setConstructorIngredients({...ing, uuid}));
+            }
+        }
+    });
+
+    const [{ isOver }, dropTargerBunRef] = useDrop({
+
+        accept: 'ingredient',
+        collect: monitor => ({
+          isOver: monitor.isOver()
+        }),
+        drop(item) {
+            const bun = item as IConstructorIngredientsDND;
+            if (bun.type === 'bun'){
+                dispatch(setConstructorBuns(bun));
+
+            }
+        }
+    });
+
+    const handleCreateOrder = () => {
+        if(bun && constructorIngredients){
+            if(bun !== undefined){
+                const idIngredients = constructorIngredients.map(el => el._id);
+                const idBuns = bun !== null ? [bun._id, bun._id] : [];
+                const idAllIngredients = idIngredients.concat(idBuns);
+                dispatch(getOrderNumber(idAllIngredients));
+            }
+            onOpen();
+        }
+        
     }
+
+    const moveCard = useCallback((dragIndex, hoverIndex) => {
+        const dragCard = constructorIngredients[dragIndex];
+        const newCards = [...constructorIngredients];
+        newCards.splice(dragIndex, 1);
+        newCards.splice(hoverIndex, 0, dragCard);
+        dispatch({
+            type: UPDATE_CONSTRUCTOR,
+            payload: newCards,
+        })
+    }, [constructorIngredients, dispatch])
 
     return (
         <div className={styles.container}>
-            <div className={styles.wrapper}>
-
-                <div className={`ml-8 ${styles.bun}`}>
-                    {
-                        bun !== undefined && (
-                            <ConstructorElement
-                                type="top"
-                                isLocked={true}
-                                text={`${bun.name} (верх)`}
-                                price={bun.price}
-                                thumbnail={bun.image}
-                            /> 
-                        )
-                    }
-                   
+            <div className={styles.wrapper} >
+                <div className={`ml-8 ${styles.bun} ${isOver ? styles.hoverBun : ''}`} ref={dropTargerBunRef}>
+                    <ConstructorBuns typeBun="top" typeText='(верх)'/>
                 </div>
-
-                <div className={styles.ingredients}>
-                {
-                    ingredientsConstructor.map(el => {
-                        return (
-                            <ConstructorIngredients key={el._id} name={el.name} image={el.image} price={el.price}/>
-                        )
-                    })
-                }
-                </div>
-
-
-                <div className={`ml-8 ${styles.bun}`}>
+                <div className={`${styles.ingredients} ${isHover ? styles.hover : ''}`} ref={dropTargerRef}>
                     {
-                        bun !== undefined && (
-                            <ConstructorElement
-                                type="bottom"
-                                isLocked={true}
-                                text={`${bun.name} (низ)`}
-                                price={bun.price}
-                                thumbnail={bun.image}
-                            />
-                        )
+                    constructorIngredients && 
+                        constructorIngredients.map((el, index) => {
+                            return (
+                                <ConstructorElementIngredient key={el.uuid} index={index} el={el} moveCard={moveCard}/> //key={`${el._id}-${index}`}
+                            )
+                        })
                     }
-
+                </div>
+                <div className={`ml-8 ${styles.bun}`}>
+                    <ConstructorBuns typeBun="bottom" typeText='(низ)'/>
                 </div>
             </div>
+
             <div className={`mt-10 ${styles.orderWrapper}`}>
                 <span className={`text text_type_digits-medium mr-10 ${styles.span}`}>
-                    {amount}
+                    {
+                        amount ? <>{amount}</> : '0'
+                    }
                     <CurrencyIcon type="primary" />
                 </span>
                 <Button type="primary" size="large" onClick={handleCreateOrder} >
