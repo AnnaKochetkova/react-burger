@@ -6,26 +6,12 @@ import styles from './app.module.css';
 import Modal from '../modal/modal';
 import OrderDetails from '../order-details/order-details';
 import IngredientDetails from '../Ingredient-details/Ingredient-details';
+import { ProviderIngredients } from './contextIngredients';
 
 function App() {
   const [openOrder, setOpenOrder] = useState<boolean>(false);
   const [openDetails, setOpenDetails] = useState<IListItemIngredient | undefined>(undefined);
-  const url = 'https://norma.nomoreparties.space/api/ingredients';
 
-  const [list, setList] = useState([]);
-
-  useEffect(() => {
-    (async function(){
-      try {
-          let response = await fetch(url);
-          let result = await response.json();
-          setList(result.data); 
-      } catch (error) {
-          console.log(error);
-      }
- 
-    }())
-  }, [])
 
   const onClose = useCallback(() => {
     setOpenOrder(false);
@@ -41,19 +27,23 @@ function App() {
   }
 
   return (
+    <ProviderIngredients >
     <div className="App">
-      <AppHeader/>
-      <main className={styles.main}>
-          <BurgerIngredients onOpen={onOpenDetails} list={list}/>
-          <BurgerConstructor onOpen={onOpenOrder} list={list}/>
-          <Modal header={<></>} open={openOrder} onClose={onClose}> 
-              <OrderDetails/>
-          </Modal>
-          <Modal header={<>Детали ингредиента</>} open={openDetails !== undefined} onClose={onClose}> 
-              <IngredientDetails ingredientDetails={openDetails}/>
-          </Modal>
-      </main>
+      
+        <AppHeader/>
+        <main className={styles.main}>
+            <BurgerIngredients onOpen={onOpenDetails}/>
+            <BurgerConstructor onOpen={onOpenOrder} />
+            <Modal header={<></>} open={openOrder} onClose={onClose}> 
+                <OrderDetails/>
+            </Modal>
+            <Modal header={<>Детали ингредиента</>} open={openDetails !== undefined} onClose={onClose}> 
+                <IngredientDetails ingredientDetails={openDetails}/>
+            </Modal>
+        </main>
+      
     </div>
+    </ProviderIngredients>
   );
 }
 

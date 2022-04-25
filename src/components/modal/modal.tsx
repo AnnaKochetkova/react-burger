@@ -27,15 +27,15 @@ const Modal = (props: IModalProps) => {
         }
     }, [])
 
-    useEffect(() => {
-        const body = document.getElementsByTagName('body');
-        if(open) {
-            body[0].style.overflow = 'hidden';
-            body[0].style.width = 'calc(100% - 17px)';
-        } else {
-            body[0].removeAttribute('style')
-        }
-    }, [open]);
+    // useEffect(() => {
+    //     const body = document.getElementsByTagName('body');
+    //     if(open) {
+    //         body[0].style.overflow = 'hidden';
+    //         body[0].style.width = 'calc(100% - 17px)';
+    //     } else {
+    //         body[0].removeAttribute('style')
+    //     }
+    // }, [open]);
     if(!open && modalRoot !== null) return null;
 
     return createPortal(

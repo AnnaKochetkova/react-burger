@@ -1,11 +1,13 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import styles from './burger-ingredients.module.css';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import Ingredient from './ingredient';
 import { groupBy } from '../../utils/group-by';
+import { ContextIngredients, EIngredientType } from '../app/contextIngredients';
+
 
 export interface IListItemIngredient {
-    type: "bun" |"sauce" | "main";
+    type: EIngredientType;
     _id: string;
     name: string;
     image: string;
@@ -14,7 +16,6 @@ export interface IListItemIngredient {
     fat: number;
     carbohydrates: number;
     calories: number;
-    
 }
 
 type TTransleteTitle = {
@@ -31,14 +32,17 @@ export type TOnOpenBurgerIngredient = (item: IListItemIngredient) => void;
 
 interface IBurgerIngredientsProps {
     onOpen: TOnOpenBurgerIngredient;
-    list: any[];
+    
 }
 
 const BurgerIngredients = (props: IBurgerIngredientsProps) => {
+
+    const {list} = useContext(ContextIngredients);
+
     const [current, setCurrent] = useState('one');
 
     const {onOpen} = props;
-    const group = groupBy<IListItemIngredient>(props.list, (item) => item.type);
+    const group = groupBy<IListItemIngredient>(list, (item) => item.type);
     
 
     return (
