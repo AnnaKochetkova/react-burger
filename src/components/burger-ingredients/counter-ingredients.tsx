@@ -7,10 +7,8 @@ interface ICounterProps {
 }
 
 export const CounterIngredients = ({id} : ICounterProps) => {
-
+    const constructorIngredients = useSelector((store: RootState) => store.constructor.ingredientsConstructor) || [] ;
     
-    const constructorIngredients = useSelector((store: RootState) => store.constructor.ingredientsConstructor);
-
     const count = constructorIngredients.filter(el => el._id === id).length;
 
     if(count === 0){

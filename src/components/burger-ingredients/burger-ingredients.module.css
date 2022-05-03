@@ -41,6 +41,8 @@
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
+    color: #F2F2F3;
+    text-decoration: none;
 }
 
 .price{

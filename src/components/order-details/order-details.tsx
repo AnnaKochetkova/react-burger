@@ -4,12 +4,14 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../../services/logic/rootReducer';
 
 const OrderDetails = () => {
+    
     const order = useSelector((store: RootState) => store.order.order);
+    
     const {orderRequest, orderError} = useSelector((store: RootState) => ({...store.order}))
     return(
         <>
         {
-            orderRequest ? '' : 
+            orderRequest ? <div className='text text_type_main-medium mb-8'>Идет загрузка...</div> : 
             orderError ? <div>Произошла ошибка</div> :
             <div className={`${styles.order} mb-30`}>
                 <p className='text text_type_digits-large mb-8'>{order}</p>

@@ -1,17 +1,16 @@
-import { GET_ORDER_REQUEST, GET_ORDER_SUCCESS, GET_ORDER_ERROR } from "../actions/order";
+import { GET_ORDER_REQUEST, GET_ORDER_SUCCESS, GET_ORDER_ERROR, IS_CREATED } from "../actions/order";
 import { ETypeActions } from "../actions/ingredients";
 
 export interface IAction {
     type: ETypeActions,
-    order: number,
-    orderRequest: boolean,
-    orderError: boolean
+    payload: number,
 }
 
 const initialState = {
     order: 0,
     orderRequest: false,
     orderError: false,
+    isCreated: false,
 }
 
 export const orderNumberReducer = (state = initialState, action: IAction) => {
@@ -25,7 +24,7 @@ export const orderNumberReducer = (state = initialState, action: IAction) => {
         case GET_ORDER_SUCCESS: {
             return {
                 ...state,
-                order: action.order,
+                order: action.payload,
                 orderRequest: false,
                 orderError: false,
             }
@@ -35,6 +34,12 @@ export const orderNumberReducer = (state = initialState, action: IAction) => {
                 ...state,
                 orderRequest: false,
                 orderError: true,
+            }
+        }
+        case IS_CREATED: {
+            return {
+                ...state,
+                isCreated: true,
             }
         }
         default: {

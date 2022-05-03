@@ -2,9 +2,7 @@ import { GET_ALL_INGREDIENTS_SUCCESS, GET_ALL_INGREDIENTS_ERROR, GET_ALL_INGREDI
 
 export interface IAction {
     type: ETypeActions,
-    ingredients: [],
-    ingredientsRequest: boolean,
-    ingredientsError: boolean
+    payload: [],
 }
 
 const initialState = {
@@ -24,7 +22,7 @@ export const ingredientsReducer = (state = initialState, action: IAction) => {
         case GET_ALL_INGREDIENTS_SUCCESS: {
             return {
                 ...state,
-                ingredients: action.ingredients,
+                ingredients: action.payload,
                 ingredientsRequest: false,
                 ingredientsError: false,
             }
@@ -37,7 +35,6 @@ export const ingredientsReducer = (state = initialState, action: IAction) => {
             }
         }
         default: {
-            console.log('default state ingredientsReducer', state, action);
             return state;
         }
     }

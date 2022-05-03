@@ -14,10 +14,21 @@
 .headerConstructor{
     width: 178px;
     min-height: 24px;
+    opacity: 50%;
+}
+
+.headerConstructor:hover{
+    opacity: 100%;
+}
+
+.active{
+    opacity: 100%;
 }
 
 .text{
     vertical-align: super;
+    color: #8585AD;
+    text-decoration: none;
 }
 
 .linkContainer{
@@ -27,8 +38,4 @@
 
 .linksContainer{
     width: 383px;
-}
-
-.opacity{
-    opacity: 50%;
 }
