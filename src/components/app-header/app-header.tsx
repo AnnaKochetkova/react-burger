@@ -19,7 +19,9 @@ const AppHeader = () => {
                         <span className={`ml-2 ${styles.text}`}>Лента заказов</span>
                     </a>
                 </div>
-                <Logo/>
+                <Link to='/'>
+                    <Logo/>
+                </Link>
                 <div className={styles.linkContainer}>
                     <NavLink exact to={user ? "/profile" : "/login"} className={`p-4 ml-2 ${styles.headerConstructor}`} activeClassName={styles.active}>
                         <ProfileIcon  type="primary" />

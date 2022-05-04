@@ -2,7 +2,7 @@ import { PasswordInput, Button, Input } from '@ya.praktikum/react-developer-burg
 import { useState, ChangeEvent, FormEvent } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './reset-password-page.module.css';
-import api from '../../utils/api';
+import api from '../utils/api';
 import { useHistory } from 'react-router-dom';
 
 const ResetPasswordPage = () => {

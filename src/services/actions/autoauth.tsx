@@ -6,22 +6,27 @@ export const AUTO_AUTHORIZATION_ACCOUNT = 'AUTO_AUTHORIZATION_ACCOUNT';
 
 export const autoauth = () => {
     return async function (dispatch: (arg0: { type: string, payload: IApiUser | undefined }) => void) {
-        const token = getToken();
-        if(token){
-            const result = await api.me();
-            console.log(result.user)
-            dispatch({
-                type: AUTHORIZATION_ACCOUNT,
-                payload: result.user,
-            });
+        try {
+            const token = getToken();
+            if(token){
+                const result = await api.me();
+                console.log(result.user)
+                dispatch({
+                    type: AUTHORIZATION_ACCOUNT,
+                    payload: result.user,
+                });
+                dispatch({
+                    type: IS_READY,
+                    payload: undefined
+                });
+            }
             dispatch({
                 type: IS_READY,
                 payload: undefined
             });
+        } catch (error) {
+            throw new Error('Error');
         }
-        dispatch({
-            type: IS_READY,
-            payload: undefined
-        });
+        
     }
 }

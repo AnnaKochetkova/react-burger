@@ -34,7 +34,6 @@ export type TOnOpenBurgerIngredient = (item: IListItemIngredient) => void;
 
 interface IBurgerIngredientsProps {
     onOpen: TOnOpenBurgerIngredient;
-
 }
 
 const BurgerIngredients = (props: IBurgerIngredientsProps) => {

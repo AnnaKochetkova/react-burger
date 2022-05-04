@@ -3,7 +3,7 @@
 import * as React from 'react';
 import { Route, Redirect, RouteProps, RouteComponentProps } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { RootState } from "../../services/logic/rootReducer";
+import { RootState } from "../services/logic/rootReducer";
 // @ts-ignore
 interface PrivateRouteParams extends RouteProps {
     component:

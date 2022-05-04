@@ -1,10 +1,10 @@
 import { EmailInput, PasswordInput, Button, Input } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from './profile-page.module.css';
 import { useState, useCallback, ChangeEvent } from 'react';
-import { RootState } from '../../services/logic/rootReducer';
-import api from '../../utils/api';
+import { RootState } from '../services/logic/rootReducer';
+import api from '../utils/api';
 import { useSelector, useDispatch } from 'react-redux';
-import { AUTHORIZATION_ACCOUNT } from '../../services/actions/authorization';
+import { AUTHORIZATION_ACCOUNT } from '../services/actions/authorization';
 
 interface StateAccount {
     email: string;

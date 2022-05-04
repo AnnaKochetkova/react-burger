@@ -3,7 +3,7 @@
 import * as React from 'react';
 import { Route, Redirect, RouteProps, RouteComponentProps } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { RootState } from "../../services/logic/rootReducer";
+import { RootState } from "../services/logic/rootReducer";
 // @ts-ignore
 interface PrivateRouteParams extends RouteProps {
     component:
@@ -16,12 +16,6 @@ const ProtectedPage = ({
      ...rest}: PrivateRouteParams) => {
     const user = useSelector((store: RootState) => store.authorization.user);
 
-    const routes = ['/login', '/register', '/forgot-password', '/reset-password'];
-
-    if(user && routes.includes(rest.path as string)){
-        console.log('ready')
-        // return (<Redirect to={{pathname: '/profile'}}/>)
-    }
     return (
         <Route
             {...rest}

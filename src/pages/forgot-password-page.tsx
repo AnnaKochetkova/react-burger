@@ -1,7 +1,7 @@
 import { EmailInput, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from './forgot-password-page.module.css';
 import { Link } from 'react-router-dom';
-import api from '../../utils/api';
+import api from '../utils/api';
 import { useState, ChangeEvent, FormEvent } from 'react';
 import { useHistory } from 'react-router-dom';
 

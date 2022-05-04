@@ -30,14 +30,19 @@ export const setConstructorBuns = (buns: IConstructorIngredientsDND) => {
 
 export const deleteConstructorIngredient = (index: number) => {
     return function(dispatch: IDispatch, getState: () => any) {
-        const store = getState();
-        const newIngredients = [...store.constructor.ingredientsConstructor];
-        if (index !== -1) {
-            newIngredients.splice(index, 1);
+        try {
+            const store = getState();
+            const newIngredients = [...store.constructor.ingredientsConstructor];
+            if (index !== -1) {
+                newIngredients.splice(index, 1);
+            }
+            dispatch({
+                type: ETypeActions.SET_CONSTRUCTOR_INGREDIENT,
+                payload: newIngredients,
+            })
+        } catch (error) {
+            throw new Error('Error');
         }
-        dispatch({
-            type: ETypeActions.SET_CONSTRUCTOR_INGREDIENT,
-            payload: newIngredients,
-        })
+        
     }
 }

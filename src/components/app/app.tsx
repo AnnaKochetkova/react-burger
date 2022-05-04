@@ -1,4 +1,4 @@
-import { useCallback, useState, useEffect } from 'react';
+import { useCallback, useState, useEffect, ChangeEvent } from 'react';
 import AppHeader from '../app-header/app-header';
 import BurgerIngredients, { IListItemIngredient } from '../burger-ingredients/burger-ingredients';
 import BurgerConstructor from '../burger-constructor/burger-constructor';
@@ -8,18 +8,19 @@ import OrderDetails from '../order-details/order-details';
 import IngredientDetails from '../Ingredient-details/Ingredient-details';
 import { DndProvider } from 'react-dnd'
 import { HTML5Backend } from 'react-dnd-html5-backend';
-import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
-import LoginPage from '../pages/login-page';
-import RegisterPage from '../pages/register-page';
-import ForgotPasswordPage from '../pages/forgot-password-page';
-import ResetPasswordPage from '../pages/reset-password-page';
-import ProfilePage from '../pages/profile-page';
-import ProtectedPage from '../pages/protected-page';
-import Provider from '../pages/provider';
-import Page404 from '../pages/page404';
-import PrivatePage from '../pages/private-page';
+import { Route, BrowserRouter as Router, Switch, Redirect } from 'react-router-dom';
+import LoginPage from '../../pages/login-page';
+import RegisterPage from '../../pages/register-page';
+import ForgotPasswordPage from '../../pages/forgot-password-page';
+import ResetPasswordPage from '../../pages/reset-password-page';
+import ProfilePage from '../../pages/profile-page';
+import ProtectedPage from '../../pages/protected-page';
+import Provider from '../../pages/provider';
+import Page404 from '../../pages/page404';
+import PrivatePage from '../../pages/private-page';
 import { useLocation, useHistory } from 'react-router-dom';
-import IngredientDetailsPage from '../pages/ingredient-details-page';
+import WrapperModalIngredient from '../Ingredient-details/wrapper-modal-ingredient';
+import IngredientDetailsPage from '../../pages/ingredient-details-page';
 
 interface ILocationState {
   state: any;
@@ -32,7 +33,7 @@ function App() {
 
     const location = useLocation() as unknown as ILocationState;
     const history = useHistory();
-    let background = location.state && location.state.background;
+    const background = location.state && location.state.background;
     
 
     const handleModalClose = () => {
@@ -55,7 +56,7 @@ function App() {
                   <BurgerConstructor onOpen={onOpenOrder} />
                 </DndProvider>
               </Route>
-              <ProtectedPage path="/ingredients/:ingredientId" component={()=>(<IngredientDetailsPage />)}/>
+              <Route path="/ingredients/:ingredientId" component={()=>(<IngredientDetailsPage />)}/>
               <Route
                 path='/order'
                 children={
@@ -68,15 +69,12 @@ function App() {
               <Page404/>
             </Route>
           </Switch>
-
           {background && (
             <Route
               exact
               path='/ingredients/:ingredientId'
             >
-              <Modal header={<>Детали ингредиента</>} open={openDetails !== undefined} onClose={handleModalClose}>
-                  <IngredientDetails ingredientDetails={openDetails}/>
-              </Modal>
+              <WrapperModalIngredient/>
             </Route>
           )}
           </main>
@@ -101,7 +99,6 @@ function App() {
   const onOpenDetails = (item: IListItemIngredient) => {
     setOpenDetails(item);
   }
-
 
   return (
     

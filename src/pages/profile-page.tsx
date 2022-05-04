@@ -1,11 +1,11 @@
 import styles from './profile-page.module.css';
 import { Link } from 'react-router-dom';
-import api from '../../utils/api';
-import { setToken } from '../../utils/utils';
+import api from '../utils/api';
+import { setToken } from '../utils/utils';
 import ProfileFormPage from './profile-form-page';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { AUTHORIZATION_ACCOUNT } from '../../services/actions/authorization';
+import { AUTHORIZATION_ACCOUNT } from '../services/actions/authorization';
 
 const ProfilePage = () => {
 

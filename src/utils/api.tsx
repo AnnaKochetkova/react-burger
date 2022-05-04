@@ -23,10 +23,11 @@ interface IApiRequest extends IApiRequestUser{
 
 export const baseUrl = 'https://norma.nomoreparties.space/api/';
 
-const checkResponse = (res: Response) => {
+const checkResponse = async(res: Response) => {
     if (!res.ok) {
         throw new Error('Ответ сети был не ok.');
     }
+    return await res.json();
 }
 
 const getOrder = async function(idAllIngredients: string[]) {
@@ -39,25 +40,30 @@ const getOrder = async function(idAllIngredients: string[]) {
                 "ingredients": idAllIngredients
             })
         })
-        checkResponse(request)
-    return await request.json();
+        return checkResponse(request)
+    // return await request.json();
 }
 
 const getAllIngredients = async function() {
-    let response = await makeRequest(`${baseUrl}ingredients`,{
+    const response = await makeRequest(`${baseUrl}ingredients`,{
         method: 'get'
     });
-    checkResponse(response);
-    return await response.json();
+    return checkResponse(response);
+    // return await response.json();
 }
 
 const getByIdIngredient = async function(id: string): Promise<IListItemIngredient> {
-    let response = await makeRequest(`${baseUrl}ingredients`,{
+    const response = await makeRequest(`${baseUrl}ingredients`,{
         method: 'get'
     });
-    checkResponse(response);
-    const result = await response.json();
-    return result.data.filter((el: IListItemIngredient) => el._id = id)[0];
+    // checkResponse(response);
+    if (!response.ok) {
+        throw new Error('Ответ сети был не ok.');
+    } else {
+        const result = await response.json();
+        return result.data.find((el: IListItemIngredient) => el._id === id);
+    }
+    
 }
 
 const authorizationAccount = async function(email: string, password: string | number): Promise<IApiRequest> {
@@ -71,8 +77,8 @@ const authorizationAccount = async function(email: string, password: string | nu
             "password": password,
         })
     })
-    checkResponse(request);
-    return await request.json();
+    return checkResponse(request);
+    // return await request.json();
 }
 
 const registrationAccount = async function(email: string, password: string, name: string): Promise<IApiRequest> {
@@ -87,16 +93,16 @@ const registrationAccount = async function(email: string, password: string, name
             "name": name,
         })
     })
-    checkResponse(request);
-    return await request.json();
+    return checkResponse(request);
+    // return await request.json();
 }
 
 const me = async function(): Promise<IApiRequestUser> {
     let response = await makeRequest(`${baseUrl}auth/user`,{
         method: 'get'
     });
-    checkResponse(response);
-    return await response.json();
+    return checkResponse(response);
+    // return await response.json();
 }
 
 const logout = async function(): Promise<IApiRequestUserActions> {
@@ -110,8 +116,8 @@ const logout = async function(): Promise<IApiRequestUserActions> {
             "token": tokenApi?.refreshToken,
         })
     })
-    checkResponse(request);
-    return await request.json();
+    return checkResponse(request);
+    // return await request.json();
 }
 
 const forgotPassword = async function(email: string): Promise<IApiRequestUserActions>{
@@ -124,8 +130,8 @@ const forgotPassword = async function(email: string): Promise<IApiRequestUserAct
             "email": email,
         })
     })
-    checkResponse(request);
-    return await request.json();
+    return checkResponse(request);
+    // return await request.json();
 }
 
 const resetPassword = async function(password: string, token: string) {
@@ -139,8 +145,8 @@ const resetPassword = async function(password: string, token: string) {
             "token": token,
         })
     })
-    checkResponse(request);
-    return await request.json();
+    return checkResponse(request);
+    // return await request.json();
 }
 
 const updateUser = async function (email: string, name: string) {
@@ -154,8 +160,8 @@ const updateUser = async function (email: string, name: string) {
             "name": name,
         })
     })
-    checkResponse(request);
-    return await request.json();
+    return checkResponse(request);
+    // return await request.json();
 }
 
 const api = {

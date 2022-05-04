@@ -1,6 +1,6 @@
 import { Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { Link } from 'react-router-dom';
-import error from '../../images/404error.png';
+import error from '../images/404error.png';
 import styles from './page404.module.css';
 import { useHistory } from 'react-router-dom';
 

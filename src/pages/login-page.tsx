@@ -2,8 +2,8 @@ import { EmailInput, PasswordInput, Button } from '@ya.praktikum/react-developer
 import { useState, ChangeEvent, useCallback, FormEvent, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { authorization } from '../../services/actions/authorization';
-import { RootState } from '../../services/logic/rootReducer';
+import { authorization } from '../services/actions/authorization';
+import { RootState } from '../services/logic/rootReducer';
 import { Redirect } from 'react-router-dom';
 import styles from './login-page.module.css';
 import { useHistory } from 'react-router-dom';
@@ -46,7 +46,8 @@ const LoginPage = () => {
 
     if(account){
         return (
-            <Redirect to={{pathname: '/profile'}}/>
+            //@ts-ignore
+            <Redirect to={state?.from || '/'}/> //<Redirect to={{pathname: '/profile'}}/>
         )
     }
 

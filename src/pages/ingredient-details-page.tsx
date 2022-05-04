@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
-import { IListItemIngredient } from '../burger-ingredients/burger-ingredients';
+import { IListItemIngredient } from '../components/burger-ingredients/burger-ingredients';
 import { useParams } from 'react-router-dom';
 import styles from './ingredient-details-page.module.css';
-import api from '../../utils/api';
+import api from '../utils/api';
 
 interface PageParams {
     ingredientId: string;

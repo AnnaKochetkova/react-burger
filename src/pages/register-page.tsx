@@ -3,9 +3,9 @@ import styles from './register-page.module.css';
 import { useState, ChangeEvent, FormEvent, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { RootState } from '../../services/logic/rootReducer';
+import { RootState } from '../services/logic/rootReducer';
 import { Redirect } from 'react-router-dom';
-import { registrationAccount } from '../../services/actions/registration';
+import { registrationAccount } from '../services/actions/registration';
 
 interface StateForm {
     email: string;

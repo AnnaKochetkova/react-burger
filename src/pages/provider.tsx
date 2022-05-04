@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { autoauth } from "../../services/actions/autoauth";
-import { RootState } from "../../services/logic/rootReducer";
+import { autoauth } from "../services/actions/autoauth";
+import { RootState } from "../services/logic/rootReducer";
 
 interface IProviderProps {
     children: JSX.Element[]
