@@ -20,7 +20,10 @@ import Page404 from '../../pages/page404';
 import PrivatePage from '../../pages/private-page';
 import { useLocation, useHistory } from 'react-router-dom';
 import WrapperModalIngredient from '../Ingredient-details/wrapper-modal-ingredient';
+import { useDispatch, useSelector } from 'react-redux';
+import { getIngredients } from '../../services/actions/ingredients';
 import IngredientDetailsPage from '../../pages/ingredient-details-page';
+import { RootState } from '../../services/logic/rootReducer';
 
 interface ILocationState {
   state: any;
@@ -34,11 +37,15 @@ function App() {
     const location = useLocation() as unknown as ILocationState;
     const history = useHistory();
     const background = location.state && location.state.background;
-    
+    const ingredients = useSelector((store: RootState) => store.ingredients.ingredients);
 
     const handleModalClose = () => {
       history.goBack();
     };
+
+    // useEffect(() => {
+    //   console.log(ingredients, 'ingredients modalSwitch')
+    // }, [])
 
     return (
       <Provider>
@@ -86,6 +93,7 @@ function App() {
 
   const [openOrder, setOpenOrder] = useState<boolean>(false);
   const [openDetails, setOpenDetails] = useState<IListItemIngredient | undefined>(undefined);
+  const dispatch = useDispatch();
 
   const onClose = useCallback(() => {
     setOpenOrder(false);
@@ -99,6 +107,10 @@ function App() {
   const onOpenDetails = (item: IListItemIngredient) => {
     setOpenDetails(item);
   }
+
+  useEffect(() => {
+    dispatch(getIngredients());
+  }, []);
 
   return (
     

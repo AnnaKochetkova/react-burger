@@ -41,7 +41,7 @@ export const deleteConstructorIngredient = (index: number) => {
                 payload: newIngredients,
             })
         } catch (error) {
-            throw new Error('Error');
+            console.log('Error');
         }
         
     }

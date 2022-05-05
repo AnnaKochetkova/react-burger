@@ -1,10 +1,9 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useRef } from 'react';
 import styles from './burger-ingredients.module.css';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import Ingredient from './ingredient';
 import { groupBy } from '../../utils/group-by';
-import { useSelector, useDispatch } from 'react-redux';
-import { getIngredients } from '../../services/actions/ingredients';
+import { useSelector } from 'react-redux';
 import { RootState } from '../../services/logic/rootReducer';
 
 
@@ -44,7 +43,7 @@ const BurgerIngredients = (props: IBurgerIngredientsProps) => {
     const containerRef = useRef(null);
 
     const list = useSelector((store: RootState) => store.ingredients.ingredients);
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
 
     const [current, setCurrent] = useState('bun');
 
@@ -96,9 +95,9 @@ const BurgerIngredients = (props: IBurgerIngredientsProps) => {
         }
     }
 
-    useEffect(() => {
-        dispatch(getIngredients());
-    }, []);
+    // useEffect(() => {
+    //     dispatch(getIngredients());
+    // }, []);
 
     return (
         <div className={styles.container}>

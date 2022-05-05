@@ -25,7 +25,7 @@ export const autoauth = () => {
                 payload: undefined
             });
         } catch (error) {
-            throw new Error('Error');
+            console.log('Error');
         }
         
     }

@@ -52,20 +52,6 @@ const getAllIngredients = async function() {
     // return await response.json();
 }
 
-const getByIdIngredient = async function(id: string): Promise<IListItemIngredient> {
-    const response = await makeRequest(`${baseUrl}ingredients`,{
-        method: 'get'
-    });
-    // checkResponse(response);
-    if (!response.ok) {
-        throw new Error('Ответ сети был не ok.');
-    } else {
-        const result = await response.json();
-        return result.data.find((el: IListItemIngredient) => el._id === id);
-    }
-    
-}
-
 const authorizationAccount = async function(email: string, password: string | number): Promise<IApiRequest> {
     const request = await makeRequest(`${baseUrl}auth/login`, {
         method: 'post',
@@ -174,6 +160,5 @@ const api = {
     logout,
     resetPassword,
     updateUser,
-    getByIdIngredient,
 }
 export default api;

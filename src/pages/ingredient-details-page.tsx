@@ -2,7 +2,8 @@ import { useState, useEffect } from 'react';
 import { IListItemIngredient } from '../components/burger-ingredients/burger-ingredients';
 import { useParams } from 'react-router-dom';
 import styles from './ingredient-details-page.module.css';
-import api from '../utils/api';
+import { useSelector } from "react-redux";
+import { RootState } from '../services/logic/rootReducer';
 
 interface PageParams {
     ingredientId: string;
@@ -11,9 +12,11 @@ interface PageParams {
 const IngredientDetailsPage = () => {
     const [ing, setIng] = useState<IListItemIngredient | undefined>(undefined)
     let params = useParams<PageParams>();
+    const ingredients = useSelector((store: RootState) => store.ingredients.ingredients);
     useEffect(() => {
         if (params.ingredientId) {
-            api.getByIdIngredient(params.ingredientId).then((i) => setIng(i));
+            let ingred = ingredients.find((el: IListItemIngredient) => el._id === params.ingredientId)
+            setIng(ingred);
         }
     }, [params]);
     
