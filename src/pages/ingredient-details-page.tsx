@@ -14,11 +14,11 @@ const IngredientDetailsPage = () => {
     let params = useParams<PageParams>();
     const ingredients = useSelector((store: RootState) => store.ingredients.ingredients);
     useEffect(() => {
-        if (params.ingredientId) {
+        if (params.ingredientId && ing?._id !== params.ingredientId) {
             let ingred = ingredients.find((el: IListItemIngredient) => el._id === params.ingredientId)
             setIng(ingred);
         }
-    }, [params]);
+    }, [params, ingredients]);
     
     return (
         <div className={`${styles.wrapperIngredient} `}>

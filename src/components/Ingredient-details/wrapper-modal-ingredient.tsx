@@ -23,14 +23,13 @@ const WrapperModalIngredient = () => {
       };
 
     useEffect(() => {
-        if (params.ingredientId) {
-
+        if (params.ingredientId && ing?._id !== params.ingredientId) {
             let ingred = ingredients.find((el: IListItemIngredient) => el._id === params.ingredientId)
             console.log(ingredients,'ingredients')
             console.log(ingred, 'ingred')
             setIng(ingred);
         }
-    }, [params]);
+    }, [params, ingredients]);
     return (
         <Modal header={<>Детали ингредиента</>} open={ing !== undefined} onClose={handleModalClose}>
             <IngredientDetails ingredientDetails={ing}/>

@@ -37,7 +37,6 @@ function App() {
     const location = useLocation() as unknown as ILocationState;
     const history = useHistory();
     const background = location.state && location.state.background;
-    const ingredients = useSelector((store: RootState) => store.ingredients.ingredients);
 
     const handleModalClose = () => {
       history.goBack();
