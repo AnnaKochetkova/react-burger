@@ -1,12 +1,12 @@
 import { IAction } from "../reducers/constructor-ingredients";
 import { ETypeActions } from "./ingredients";
 import { IListItemIngredient } from "../../components/burger-ingredients/burger-ingredients";
-import { v4 as uuidv4 } from 'uuid';
 
 export const UPDATE_CONSTRUCTOR_INGREDIENTS = 'GET_CONSTRUCTOR_INGREDIENTS';
 export const UPDATE_BUNS = 'GET_BUNS';
 export const SET_CONSTRUCTOR_INGREDIENT = 'SET_CONSTRUCTOR_INGREDIENT';
 export const UPDATE_CONSTRUCTOR = 'UPDATE_CONSTRUCTOR';
+export const CLEAR_CONSTRUCTOR = 'CLEAR_CONSTRUCTOR';
 
 type IDispatch =  (arg0: IAction) => IAction;
 
@@ -30,14 +30,19 @@ export const setConstructorBuns = (buns: IConstructorIngredientsDND) => {
 
 export const deleteConstructorIngredient = (index: number) => {
     return function(dispatch: IDispatch, getState: () => any) {
-        const store = getState();
-        const newIngredients = [...store.constructor.ingredientsConstructor];
-        if (index !== -1) {
-            newIngredients.splice(index, 1);
+        try {
+            const store = getState();
+            const newIngredients = [...store.constructor.ingredientsConstructor];
+            if (index !== -1) {
+                newIngredients.splice(index, 1);
+            }
+            dispatch({
+                type: ETypeActions.SET_CONSTRUCTOR_INGREDIENT,
+                payload: newIngredients,
+            })
+        } catch (error) {
+            console.log('Error');
         }
-        dispatch({
-            type: ETypeActions.SET_CONSTRUCTOR_INGREDIENT,
-            payload: newIngredients,
-        })
+        
     }
 }

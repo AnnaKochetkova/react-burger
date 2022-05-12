@@ -1,0 +1,15 @@
+.container{
+    width: 600px;
+    height: 700px;
+    margin: auto;
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.image{
+    width: 550px;
+    height: 550px;
+}

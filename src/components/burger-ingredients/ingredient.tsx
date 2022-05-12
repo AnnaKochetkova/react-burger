@@ -2,6 +2,8 @@ import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components
 import { useDrag } from 'react-dnd';
 import { IListItemIngredient } from './burger-ingredients';
 import {CounterIngredients, CounterBuns} from './counter-ingredients';
+import { useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import styles from './burger-ingredients.module.css';
 
 interface IIngredientProps {
@@ -14,7 +16,11 @@ interface IIngredientProps {
 }
 const Ingredient = (props: IIngredientProps) => {
 
+    const location = useLocation();
+
     const { _id, name, price, image, type } = props.el;
+
+    const ingredientId = _id;
 
     const [{ opacity }, dragRef] = useDrag({
         type: 'ingredient',
@@ -25,7 +31,7 @@ const Ingredient = (props: IIngredientProps) => {
     })
 
     return (
-        <div ref={dragRef} className={styles.ingredient} onClick={props.onClick} style={{ opacity }} >
+        <Link to={{pathname: `/ingredients/${ingredientId}`, state: { background: location }}} ref={dragRef} className={styles.ingredient} onClick={props.onClick} style={{ opacity }} >
             {
                 type === 'bun' ? <CounterBuns id={_id}/> : <CounterIngredients id={_id}/>
             }
@@ -38,7 +44,7 @@ const Ingredient = (props: IIngredientProps) => {
             </div>
             
             <p className={`text text_type_main-default ${styles.name}`}>{props.name}</p>
-        </div>
+        </Link>
     )
 }
 

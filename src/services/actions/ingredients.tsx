@@ -10,10 +10,12 @@ export enum ETypeActions {
     UPDATE_CONSTRUCTOR_INGREDIENTS = 'GET_CONSTRUCTOR_INGREDIENTS',
     SET_CONSTRUCTOR_INGREDIENT = 'SET_CONSTRUCTOR_INGREDIENT',
     UPDATE_CONSTRUCTOR = 'UPDATE_CONSTRUCTOR',
+    CLEAR_CONSTRUCTOR = 'CLEAR_CONSTRUCTOR',
 
     GET_ORDER_SUCCESS = 'GET_ORDER_SUCCESS',
     GET_ORDER_REQUEST = 'GET_ORDER_REQUEST',
     GET_ORDER_ERROR = 'GET_ORDER_ERROR',
+    IS_CREATED = 'IS_CREATED'
 }
 
 export const GET_ALL_INGREDIENTS_REQUEST = 'GET_ALL_INGREDIENTS_REQUEST';
@@ -21,7 +23,7 @@ export const GET_ALL_INGREDIENTS_SUCCESS = 'GET_ALL_INGREDIENTS_SUCCESS';
 export const GET_ALL_INGREDIENTS_ERROR = 'GET_ALL_INGREDIENTS_ERROR';
 
 export const getIngredients = () => {
-    return async function(dispatch: (arg0: { type: ETypeActions; ingredients?: any; }) => void) {
+    return async function(dispatch: (arg0: { type: ETypeActions; payload?: any; }) => void) {
         dispatch({
             type: ETypeActions.GET_ALL_INGREDIENTS_REQUEST
         })
@@ -29,7 +31,7 @@ export const getIngredients = () => {
             const result = await api.getAllIngredients()
             dispatch({
                 type: ETypeActions.GET_ALL_INGREDIENTS_SUCCESS,
-                ingredients: result.data,
+                payload: result.data
             })
         } catch (error) {
             dispatch({
