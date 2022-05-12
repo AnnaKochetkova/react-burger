@@ -16,12 +16,6 @@ const PrivatePage = ({
      ...rest}: PrivateRouteParams) => {
     const user = useSelector((store: RootState) => store.authorization.user);
 
-    // const routes = ['/login', '/register', '/forgot-password', '/reset-password'];
-
-    // if(user && routes.includes(rest.path as string)){
-    //     console.log('ready')
-    //     // return (<Redirect to={{pathname: '/profile'}}/>)
-    // }
     return (
         <Route
             {...rest}

@@ -1,13 +1,21 @@
 import { GET_ORDER_REQUEST, GET_ORDER_SUCCESS, GET_ORDER_ERROR, IS_CREATED } from "../actions/order";
+import { IApiOrder } from "../../utils/api";
 import { ETypeActions } from "../actions/ingredients";
 
 export interface IAction {
     type: ETypeActions,
-    payload: number,
+    payload: IApiOrder | undefined,
 }
 
-const initialState = {
-    order: 0,
+interface IInitialState {
+    order: IApiOrder | undefined,
+    orderRequest: boolean,
+    orderError: boolean,
+    isCreated: boolean,
+}
+
+const initialState: IInitialState = {
+    order: undefined,
     orderRequest: false,
     orderError: false,
     isCreated: false,

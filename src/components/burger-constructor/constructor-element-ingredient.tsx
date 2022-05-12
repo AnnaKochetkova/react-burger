@@ -9,7 +9,7 @@ import { IListItemIngredient } from '../burger-ingredients/burger-ingredients';
 interface IConstructorElementIngredientProps {
     index: number,
     el: IListItemIngredient,
-    moveCard: (dragIndex: any, hoverIndex: any)=>void
+    moveCard: (dragIndex: number, hoverIndex: number)=>void
 }
 
 interface ClientOffset {

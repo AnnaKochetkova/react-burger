@@ -20,10 +20,9 @@ import Page404 from '../../pages/page404';
 import PrivatePage from '../../pages/private-page';
 import { useLocation, useHistory } from 'react-router-dom';
 import WrapperModalIngredient from '../Ingredient-details/wrapper-modal-ingredient';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { getIngredients } from '../../services/actions/ingredients';
 import IngredientDetailsPage from '../../pages/ingredient-details-page';
-import { RootState } from '../../services/logic/rootReducer';
 
 interface ILocationState {
   state: any;
@@ -41,10 +40,6 @@ function App() {
     const handleModalClose = () => {
       history.goBack();
     };
-
-    // useEffect(() => {
-    //   console.log(ingredients, 'ingredients modalSwitch')
-    // }, [])
 
     return (
       <Provider>

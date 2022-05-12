@@ -43,9 +43,8 @@ const BurgerIngredients = (props: IBurgerIngredientsProps) => {
     const containerRef = useRef(null);
 
     const list = useSelector((store: RootState) => store.ingredients.ingredients);
-    // const dispatch = useDispatch();
 
-    const [current, setCurrent] = useState('bun');
+    const [current, setCurrent] = useState<string>('bun');
 
     const { onOpen } = props;
     const group = groupBy<IListItemIngredient>(list, (item) => item.type);
@@ -94,10 +93,6 @@ const BurgerIngredients = (props: IBurgerIngredientsProps) => {
                 break;
         }
     }
-
-    // useEffect(() => {
-    //     dispatch(getIngredients());
-    // }, []);
 
     return (
         <div className={styles.container}>

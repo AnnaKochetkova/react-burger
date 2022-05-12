@@ -7,8 +7,8 @@ import { useHistory } from 'react-router-dom';
 
 const ResetPasswordPage = () => {
 
-    const [password, setPassword] = useState('');
-    const [value, setValue] = useState('');
+    const [password, setPassword] = useState<string>('');
+    const [value, setValue] = useState<string>('');
     const history = useHistory();
 
     const onChangePassword = (e: ChangeEvent<HTMLInputElement>) => {
