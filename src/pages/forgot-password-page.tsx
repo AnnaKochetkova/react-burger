@@ -6,7 +6,7 @@ import { useState, ChangeEvent, FormEvent } from 'react';
 import { useHistory } from 'react-router-dom';
 
 const ForgotPasswordPage = () => {
-    const [email, setEmail] = useState('');
+    const [email, setEmail] = useState<string>('');
     const history = useHistory();
 
     const forgotPassword = async () => {

@@ -145,13 +145,9 @@ const BurgerConstructor = (props: IBurgerConstructorProps) => {
                     }
                     <CurrencyIcon type="primary" />
                 </span>
-                {/* <Link to={`/order/${order}`}> */}
-                    <Button type="primary" size="large" onClick={handleCreateOrder} >
-                        Оформить заказ
-                    </Button>
-                {/* </Link> */}
-                
-                
+                <Button type="primary" size="large" onClick={handleCreateOrder} >
+                    Оформить заказ
+                </Button>
             </div>
         </div>
     )

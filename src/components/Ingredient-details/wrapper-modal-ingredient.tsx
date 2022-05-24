@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import { IListItemIngredient } from "../burger-ingredients/burger-ingredients";
 import { useSelector } from "react-redux";
-import api from "../../utils/api";
 import Modal from "../modal/modal";
 import { RootState } from "../../services/logic/rootReducer";
 import IngredientDetails from "./Ingredient-details";

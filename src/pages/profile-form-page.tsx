@@ -21,7 +21,7 @@ const ProfileFormPage = () => {
         password: '',
         name: user?.name ? user.name : '',
     });
-    const [change, setChange] = useState(false);
+    const [change, setChange] = useState<boolean>(false);
     const dispatch = useDispatch();
 
     const onChangeForm = useCallback((e: ChangeEvent<HTMLInputElement>) => {

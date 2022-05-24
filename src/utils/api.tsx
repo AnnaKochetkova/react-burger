@@ -1,4 +1,3 @@
-import { IListItemIngredient } from "../components/burger-ingredients/burger-ingredients";
 import { getToken, makeRequest } from "./utils";
 
 export interface IApiUser {
@@ -21,6 +20,16 @@ interface IApiRequest extends IApiRequestUser{
     refreshToken: string,
 }
 
+export interface IApiOrder {
+    number: number,
+}
+
+interface IApiRequestOrder {
+    name: string,
+    order: IApiOrder,
+    success: boolean,
+}
+
 export const baseUrl = 'https://norma.nomoreparties.space/api/';
 
 const checkResponse = async(res: Response) => {
@@ -30,7 +39,7 @@ const checkResponse = async(res: Response) => {
     return await res.json();
 }
 
-const getOrder = async function(idAllIngredients: string[]) {
+const getOrder = async function(idAllIngredients: string[]): Promise<IApiRequestOrder> {
     const request = await makeRequest(`${baseUrl}orders`, {
             method: 'post',
             headers: {
@@ -41,7 +50,6 @@ const getOrder = async function(idAllIngredients: string[]) {
             })
         })
         return checkResponse(request)
-    // return await request.json();
 }
 
 const getAllIngredients = async function() {
@@ -49,7 +57,6 @@ const getAllIngredients = async function() {
         method: 'get'
     });
     return checkResponse(response);
-    // return await response.json();
 }
 
 const authorizationAccount = async function(email: string, password: string | number): Promise<IApiRequest> {
@@ -64,7 +71,6 @@ const authorizationAccount = async function(email: string, password: string | nu
         })
     })
     return checkResponse(request);
-    // return await request.json();
 }
 
 const registrationAccount = async function(email: string, password: string, name: string): Promise<IApiRequest> {
@@ -80,7 +86,6 @@ const registrationAccount = async function(email: string, password: string, name
         })
     })
     return checkResponse(request);
-    // return await request.json();
 }
 
 const me = async function(): Promise<IApiRequestUser> {
@@ -88,7 +93,6 @@ const me = async function(): Promise<IApiRequestUser> {
         method: 'get'
     });
     return checkResponse(response);
-    // return await response.json();
 }
 
 const logout = async function(): Promise<IApiRequestUserActions> {
@@ -103,7 +107,6 @@ const logout = async function(): Promise<IApiRequestUserActions> {
         })
     })
     return checkResponse(request);
-    // return await request.json();
 }
 
 const forgotPassword = async function(email: string): Promise<IApiRequestUserActions>{
@@ -117,10 +120,9 @@ const forgotPassword = async function(email: string): Promise<IApiRequestUserAct
         })
     })
     return checkResponse(request);
-    // return await request.json();
 }
 
-const resetPassword = async function(password: string, token: string) {
+const resetPassword = async function(password: string, token: string): Promise<IApiRequestUserActions> {
     const request = await makeRequest(`${baseUrl}password-reset/reset`,{
         method: 'post',
         headers: {
@@ -132,10 +134,9 @@ const resetPassword = async function(password: string, token: string) {
         })
     })
     return checkResponse(request);
-    // return await request.json();
 }
 
-const updateUser = async function (email: string, name: string) {
+const updateUser = async function (email: string, name: string): Promise<IApiRequestUser> {
     const request = await makeRequest(`${baseUrl}auth/user`,{
         method: 'PATCH',
         headers: {
@@ -147,7 +148,6 @@ const updateUser = async function (email: string, name: string) {
         })
     })
     return checkResponse(request);
-    // return await request.json();
 }
 
 const api = {

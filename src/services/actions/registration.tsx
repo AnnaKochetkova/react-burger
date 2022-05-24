@@ -1,5 +1,4 @@
 import api from "../../utils/api";
-import { convertYandexTokenToTokenApi, setToken } from "../../utils/utils";
 
 export const REGISTRATION_ACCOUNT = "REGISTRATION_ACCOUNT";
 export const REGISTRATION_ACCOUNT_ERROR = "REGISTRATION_ACCOUNT_ERROR";
