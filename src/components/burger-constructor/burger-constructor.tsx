@@ -102,7 +102,7 @@ const BurgerConstructor = (props: IBurgerConstructorProps) => {
     }, [constructorIngredients, dispatch])
 
     useEffect(() => {
-        if(isCreated && constructorIngredients === [] && bun === undefined) {            
+        if(isCreated && !constructorIngredients && bun === undefined) {            
             const ingredientsStr = window.localStorage.getItem("constructorIngredients");
             const bunStr = window.localStorage.getItem("bun");
             if (ingredientsStr !== null && bunStr !== null) {

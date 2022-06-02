@@ -1,0 +1,178 @@
+.container{
+    width: 1248px;
+    height: 912px;
+    margin: auto;
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.main{
+    width: 1248px;
+    height: 852px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.orders{
+    width: 608px;
+    max-height: 852px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    overflow-y: scroll;
+    scrollbar-width: thin;
+    scrollbar-color: #8585AD #2F2F37;
+}
+
+.orders::-webkit-scrollbar{
+    width: 10px;
+}
+
+.orders::-webkit-scrollbar-track{
+    background: #2F2F37;
+}
+
+.orders::-webkit-scrollbar-thumb{
+    background-color: #8585AD;
+    border-radius: 20px;
+    border: 1px solid #2F2F37;
+}
+
+.order{
+    width: 584px;
+    min-height: 214px;
+    background: #1C1C21;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.04), 0px 0px 2px rgba(0, 0, 0, 0.06), 0px 0px 1px rgba(0, 0, 0, 0.04);
+    border-radius: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    text-decoration:none;
+    color: #F2F2F3;
+}
+
+.number{
+    width: 536px;
+    height: 24px;
+    display: flex;
+    margin: 0 auto;
+    justify-content: space-between;
+}
+
+.ingredients{
+    width: 536px;
+    height: 64px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.total{
+    min-width: 76px;
+    height: 64px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.mainOrders{
+    width: 580px;
+    height: 626px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.ordersNumber{
+    width: 580px;
+    height: 206px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.ready, .inwork{
+    width: 275px;
+    max-height: 206px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.numbers{
+    width: 265px;
+    height: 152px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    overflow: hidden;
+    /* overflow-y: scroll;
+    scrollbar-width: thin;
+    scrollbar-color: #8585AD #2F2F37; */
+    
+}
+
+.color{
+    color: #00CCCC;
+}
+
+/* .numbers::-webkit-scrollbar{
+    width: 10px;
+}
+
+.numbers::-webkit-scrollbar-track{
+    background: #2F2F37;
+}
+
+.numbers::-webkit-scrollbar-thumb{
+    background-color: #8585AD;
+    border-radius: 20px;
+    border: 1px solid #2F2F37;
+} */
+
+.totalOrders, .totalOrdersToday{
+    width: 580px;
+    height: 150px;
+}
+
+.name{
+    height: 60px;
+    overflow: hidden;
+}
+
+.wrapper{
+    width: 350px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    padding-left: 15px;
+    overflow: hidden;
+}
+
+.image{
+    width: 60px;
+    height: 60px;
+    border-radius: 100px;
+    object-fit: cover;
+    border: 2px solid #801AB2;
+    background: #131316;
+    margin-left: -15px;
+}
+
+.numberContainer{
+    display: flex;
+}
+
+.numberIng{
+    width: 60px;
+    height: 60px;
+    border-radius: 100px;
+    background: #131316;
+    border: 2px solid #801AB2;
+    margin-left: -15px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

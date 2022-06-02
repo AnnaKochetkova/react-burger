@@ -14,10 +14,10 @@ const AppHeader = () => {
                         <BurgerIcon type="primary" />
                         <span className={`ml-2 ${styles.text}`}>Конструктор</span>
                     </NavLink>
-                    <a className={`p-4 ml-2 ${styles.headerConstructor}`}>
+                    <NavLink exact to="/feed" className={`p-4 ml-2 ${styles.headerConstructor}`} activeClassName={styles.active}>
                         <ListIcon type="primary" />
                         <span className={`ml-2 ${styles.text}`}>Лента заказов</span>
-                    </a>
+                    </NavLink>
                 </div>
                 <Link to='/'>
                     <Logo/>

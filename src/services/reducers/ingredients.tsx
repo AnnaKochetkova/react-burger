@@ -1,11 +1,18 @@
 import { GET_ALL_INGREDIENTS_SUCCESS, GET_ALL_INGREDIENTS_ERROR, GET_ALL_INGREDIENTS_REQUEST, ETypeActions } from "../actions/ingredients";
+import { IListItemIngredient } from "../../components/burger-ingredients/burger-ingredients";
 
 export interface IAction {
     type: ETypeActions,
-    payload: [],
+    payload: IListItemIngredient[] | [],
 }
 
-const initialState = {
+interface IInitialState {
+    ingredients: IListItemIngredient[] | [],
+    ingredientsRequest: boolean,
+    ingredientsError: boolean,
+}
+
+const initialState: IInitialState = {
     ingredients: [],
     ingredientsRequest: false,
     ingredientsError: false,
