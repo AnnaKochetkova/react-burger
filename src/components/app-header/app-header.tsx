@@ -1,11 +1,11 @@
 import { Logo, BurgerIcon, ListIcon, ProfileIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from './app-header.module.css';
 import { Link, NavLink } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 import { RootState } from '../../services/logic/rootReducer';
+import { useSelector } from '../../services/logic/store';
 
 const AppHeader = () => {
-    const user = useSelector((store: RootState) => store.authorization.user);
+    const user = useSelector(store => store.authorization.user);
     return (
         <header className={`p-4 ${styles.header}`}>
             <div className={styles.container}>
