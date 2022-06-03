@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
-import { IOrders, wsConnectionError, wsConnectionSuccess } from '../services/actions/ws-feed';
+import { IOrders, wsConnectionClosed, wsConnectionError, wsConnectionSuccess } from '../services/actions/ws-feed';
 import { useDispatch, useSelector } from '../services/logic/store';
-import { getToken } from '../utils/utils';
+import { convertYandexTokenToTokenApi, getToken } from '../utils/utils';
 import OrdersHistoryOrderPage from './orders-history-order-page';
 import styles from './orders-history-page.module.css';
 
@@ -9,12 +9,12 @@ const OrdersHistoryPage = () => {
     const history = useSelector(store => store.feed.orders)
     const dispatch = useDispatch();
     const token = getToken();
+    const accessToken = token?.token.replace('Bearer ', '');
     
     useEffect(() => {
-        dispatch(wsConnectionSuccess(`?token=${token}`))
-
+        dispatch(wsConnectionSuccess(`?token=${accessToken}`))
         return () => {
-            dispatch(wsConnectionError());
+            dispatch(wsConnectionClosed());
         };
     }, [dispatch])
     

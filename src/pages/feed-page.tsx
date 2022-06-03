@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { IOrders, wsConnectionError, wsConnectionSuccess, WS_CONNECTION_SUCCESS } from "../services/actions/ws-feed";
+import { IOrders, wsConnectionClosed, wsConnectionError, wsConnectionSuccess, WS_CONNECTION_SUCCESS } from "../services/actions/ws-feed";
 import { useDispatch, useSelector } from "../services/logic/store";
 import FeedContainerPage from "./feed-container-page";
 import styles from './feed-page.module.css';
@@ -19,10 +19,10 @@ const FeedPage = (props: IBurgerIngredientsProps) => {
 
     useEffect(() => {
         console.log('connect')
-        dispatch(wsConnectionSuccess('all'))
+        dispatch(wsConnectionSuccess('/all'))
 
         return () => {
-            dispatch(wsConnectionError());
+            dispatch(wsConnectionClosed());
         };
     
     }, [dispatch])

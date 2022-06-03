@@ -1,5 +1,5 @@
-import {IAction} from '../reducers/ingredients';
 import api from '../../utils/api';
+import { AppDispatch, AppThunk } from '../logic/store';
 
 export enum ETypeActions {
     GET_ALL_INGREDIENTS_REQUEST = 'GET_ALL_INGREDIENTS_REQUEST',
@@ -22,10 +22,11 @@ export const GET_ALL_INGREDIENTS_REQUEST = 'GET_ALL_INGREDIENTS_REQUEST';
 export const GET_ALL_INGREDIENTS_SUCCESS = 'GET_ALL_INGREDIENTS_SUCCESS';
 export const GET_ALL_INGREDIENTS_ERROR = 'GET_ALL_INGREDIENTS_ERROR';
 
-export const getIngredients = () => {
-    return async function(dispatch: (arg0: { type: ETypeActions; payload?: any; }) => void) {
+export const getIngredients: AppThunk = () => {
+    return async function(dispatch: AppDispatch) {
         dispatch({
-            type: ETypeActions.GET_ALL_INGREDIENTS_REQUEST
+            type: ETypeActions.GET_ALL_INGREDIENTS_REQUEST,
+            payload: undefined
         })
         try {
             const result = await api.getAllIngredients()
@@ -36,6 +37,7 @@ export const getIngredients = () => {
         } catch (error) {
             dispatch({
                 type: ETypeActions.GET_ALL_INGREDIENTS_ERROR,
+                payload: undefined
             })
         }
 

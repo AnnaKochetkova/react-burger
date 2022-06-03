@@ -1,6 +1,7 @@
 import { IAction } from "../reducers/constructor-ingredients";
 import { ETypeActions } from "./ingredients";
 import { IListItemIngredient } from "../../components/burger-ingredients/burger-ingredients";
+import { AppDispatch, AppThunk } from "../logic/store";
 
 export const UPDATE_CONSTRUCTOR_INGREDIENTS = 'GET_CONSTRUCTOR_INGREDIENTS';
 export const UPDATE_BUNS = 'GET_BUNS';
@@ -8,7 +9,7 @@ export const SET_CONSTRUCTOR_INGREDIENT = 'SET_CONSTRUCTOR_INGREDIENT';
 export const UPDATE_CONSTRUCTOR = 'UPDATE_CONSTRUCTOR';
 export const CLEAR_CONSTRUCTOR = 'CLEAR_CONSTRUCTOR';
 
-type IDispatch =  (arg0: IAction) => IAction;
+type IDispatch =  AppDispatch;
 
 export interface IConstructorIngredientsDND extends IListItemIngredient {
     uuid: string,
@@ -28,7 +29,7 @@ export const setConstructorBuns = (buns: IConstructorIngredientsDND) => {
     }
 }
 
-export const deleteConstructorIngredient = (index: number) => {
+export const deleteConstructorIngredient: AppThunk = (index: number) => {
     return function(dispatch: IDispatch, getState: () => any) {
         try {
             const store = getState();

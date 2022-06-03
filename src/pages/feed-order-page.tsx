@@ -2,7 +2,7 @@ import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { IListItemIngredient } from "../components/burger-ingredients/burger-ingredients";
-import { IOrders, wsConnectionError, wsConnectionSuccess, WS_CONNECTION_START } from "../services/actions/ws-feed";
+import { IOrders, wsConnectionClosed, wsConnectionError, wsConnectionSuccess, WS_CONNECTION_START } from "../services/actions/ws-feed";
 import { useDispatch, useSelector } from "../services/logic/store";
 import { sayDate } from "../utils/say-date";
 import styles from './feed-order-page.module.css';
@@ -29,9 +29,9 @@ const FeedOrderPage = () => {
         date = sayDate(feed.createdAt)
     }
     useEffect(() => {
-        dispatch(wsConnectionSuccess('all'))
+        dispatch(wsConnectionSuccess('/all'))
         return () => {
-            dispatch(wsConnectionError());
+            dispatch(wsConnectionClosed());
         };
     }, [dispatch])
     useEffect(() => {

@@ -8,13 +8,11 @@ interface IAction {
 interface IInitialState {
     wsConnected: boolean,
     orders: DataMessage | undefined,
-    // url: string | undefined
 }
 
 const initialState: IInitialState = {
     wsConnected: false,
     orders: undefined,
-    // url: undefined
 }
 
 export const wsFeedReducer = (state = initialState, action: IAction) => {
@@ -23,7 +21,6 @@ export const wsFeedReducer = (state = initialState, action: IAction) => {
             return {
                 ...state,
                 wsConnected: true,
-                // url: action.payload
             };
 
         case WS_CONNECTION_ERROR:

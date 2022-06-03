@@ -1,11 +1,12 @@
 import { getToken } from "../../utils/utils";
 import api, { IApiUser } from "../../utils/api";
 import { AUTHORIZATION_ACCOUNT, IS_READY } from "./authorization";
+import { AppDispatch, AppThunk } from "../logic/store";
 
 export const AUTO_AUTHORIZATION_ACCOUNT = 'AUTO_AUTHORIZATION_ACCOUNT';
 
-export const autoauth = () => {
-    return async function (dispatch: (arg0: { type: string, payload: IApiUser | undefined }) => void) {
+export const autoauth: AppThunk = () => {
+    return async function (dispatch: AppDispatch) {
         try {
             const token = getToken();
             if(token){

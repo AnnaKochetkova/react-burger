@@ -1,13 +1,14 @@
 import api from "../../utils/api";
 import { convertYandexTokenToTokenApi, setToken } from "../../utils/utils";
+import { AppDispatch, AppThunk } from "../logic/store";
 
 export const AUTHORIZATION_ACCOUNT = 'AUTHORIZATION_ACCOUNT';
 export const AUTHORIZATION_ACCOUNT_ERROR = 'AUTHORIZATION_ACCOUNT_ERROR';
 export const IS_READY = 'IS_READY'; 
 
 
-export const authorization = (email: string, password: string) => {
-    return async function(dispatch: (arg0: { type: string; payload?: any; }) => void) {
+export const authorization: AppThunk = (email: string, password: string) => {
+    return async function(dispatch: AppDispatch) {
         try {
             const result = await api.authorizationAccount(email, password);
             console.log(result, 'result');
@@ -21,11 +22,13 @@ export const authorization = (email: string, password: string) => {
             } else{
                 dispatch({
                     type: AUTHORIZATION_ACCOUNT_ERROR,
+                    payload: undefined
                 })
             }
         } catch (error) {
             dispatch({
                 type: AUTHORIZATION_ACCOUNT_ERROR,
+                payload: undefined
             })
         }
 

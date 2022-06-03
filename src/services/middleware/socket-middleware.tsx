@@ -23,7 +23,7 @@ export const socketMiddleware = (wsUrl: string, wsActions: IWsAction): Middlewar
         const { onOpen, onClose, onError, onOrder, onStart } = wsActions;
         
         if(type === onStart) {
-          socket = new WebSocket(`${wsUrl}/${payload}`);
+          socket = new WebSocket(`${wsUrl}${payload}`);
         }
         
         if (socket) {
