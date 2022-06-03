@@ -3,8 +3,8 @@ import styles from './burger-ingredients.module.css';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import Ingredient from './ingredient';
 import { groupBy } from '../../utils/group-by';
-import { useSelector } from 'react-redux';
 import { RootState } from '../../services/logic/rootReducer';
+import { useSelector } from '../../services/logic/store';
 
 
 export interface IListItemIngredient {
@@ -37,12 +37,12 @@ interface IBurgerIngredientsProps {
 
 const BurgerIngredients = (props: IBurgerIngredientsProps) => {
 
-    const {ingredientsRequest, ingredientsError} = useSelector((store: RootState) => ({...store.ingredients}))
+    const {ingredientsRequest, ingredientsError} = useSelector(store => ({...store.ingredients}))
 
     const elemsRef = useRef<Array<HTMLDivElement | null>>([]);
     const containerRef = useRef(null);
 
-    const list = useSelector((store: RootState) => store.ingredients.ingredients);
+    const list = useSelector(store => store.ingredients.ingredients);
 
     const [current, setCurrent] = useState<string>('bun');
 

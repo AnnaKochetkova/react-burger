@@ -2,17 +2,19 @@ import { WS_GET_ORDERS, WS_CONNECTION_SUCCESS, WS_CONNECTION_ERROR, WS_CONNECTIO
 
 interface IAction {
     type: string;
-    payload: DataMessage | undefined;
+    payload: DataMessage | undefined  ;
 }
 
 interface IInitialState {
     wsConnected: boolean,
-    orders: DataMessage | undefined
+    orders: DataMessage | undefined,
+    // url: string | undefined
 }
 
 const initialState: IInitialState = {
     wsConnected: false,
-    orders: undefined
+    orders: undefined,
+    // url: undefined
 }
 
 export const wsFeedReducer = (state = initialState, action: IAction) => {
@@ -20,7 +22,8 @@ export const wsFeedReducer = (state = initialState, action: IAction) => {
         case WS_CONNECTION_SUCCESS:
             return {
                 ...state,
-                wsConnected: true
+                wsConnected: true,
+                // url: action.payload
             };
 
         case WS_CONNECTION_ERROR:

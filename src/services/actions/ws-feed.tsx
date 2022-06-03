@@ -21,27 +21,50 @@ export interface DataMessage {
   totalToday: number;
 }
 
-export const wsConnectionSuccess = () => {
+export interface IwsConnectionSuccess {
+  readonly type: typeof WS_CONNECTION_SUCCESS;
+  readonly payload: string
+}
+export interface IwsConnectionError {
+  readonly type: typeof WS_CONNECTION_ERROR;
+}
+export interface IwsConnectionClosed {
+  readonly type: typeof WS_CONNECTION_CLOSED;
+}
+export interface IwsGetOrder {
+  readonly type: typeof WS_GET_ORDERS;
+  readonly payload: DataMessage;
+}
+
+
+export const wsConnectionSuccess = (wsConnect: string): IwsConnectionSuccess => {
   return {
-    type: WS_CONNECTION_SUCCESS
+    type: WS_CONNECTION_SUCCESS,
+    payload: wsConnect,
   };
 };
 
-export const wsConnectionError = () => {
+export const wsConnectionError = (): IwsConnectionError => {
   return {
     type: WS_CONNECTION_ERROR
   };
 };
 
-export const wsConnectionClosed = () => {
+export const wsConnectionClosed = (): IwsConnectionClosed => {
   return {
     type: WS_CONNECTION_CLOSED
   };
 };
 
-export const wsGetOrder = (message: DataMessage) => {
+export const wsGetOrder = (message: DataMessage): IwsGetOrder => {
     return {
       type: WS_GET_ORDERS,
       payload: message
     };
 };
+
+export type TApplicationActions = 
+  | IwsConnectionSuccess
+  | IwsConnectionError
+  | IwsConnectionClosed
+  | IwsGetOrder;

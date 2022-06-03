@@ -1,9 +1,8 @@
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
-import { useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
 import { IListItemIngredient } from "../components/burger-ingredients/burger-ingredients";
 import { IOrders } from "../services/actions/ws-feed";
-import { RootState } from "../services/logic/rootReducer";
+import { useSelector } from "../services/logic/store";
 import { sayDate } from "../utils/say-date";
 import styles from './orders-history-page.module.css';
 
@@ -13,9 +12,9 @@ interface IProps {
 
 const OrdersHistoryOrderPage = (props: IProps) => {
     const location = useLocation();
-    const ingredients = useSelector((store: RootState) => store.ingredients.ingredients);
+    const ingredients = useSelector(store => store.ingredients.ingredients);
     const masIngredients = ingredients.filter(el => props.order.ingredients.includes(el._id));
-    const price = masIngredients.reduce((prev: number, curr: IListItemIngredient) => curr.type === 'bun' ? (prev + curr.price * 2) : (prev + curr.price), 0);
+    const price = masIngredients.reduce((prev, curr) => curr.type === 'bun' ? (prev + curr.price * 2) : (prev + curr.price), 0);
     const renderMas = masIngredients.filter((_, index) => index < 5);
 
     let status = '';

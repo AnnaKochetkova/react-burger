@@ -1,7 +1,6 @@
-import { Key, ReactChild, ReactFragment, ReactPortal } from "react";
-import { useSelector } from "react-redux";
-import { IOrders } from "../services/actions/ws-feed";
-import { RootState } from "../services/logic/rootReducer";
+import { useEffect } from "react";
+import { IOrders, wsConnectionError, wsConnectionSuccess, WS_CONNECTION_SUCCESS } from "../services/actions/ws-feed";
+import { useDispatch, useSelector } from "../services/logic/store";
 import FeedContainerPage from "./feed-container-page";
 import styles from './feed-page.module.css';
 
@@ -12,10 +11,22 @@ interface IBurgerIngredientsProps {
 }
 
 const FeedPage = (props: IBurgerIngredientsProps) => {
-    const feed = useSelector((store: RootState) => store.feed.orders);
-    const done = feed?.orders.filter((el: { status: string; }) => el.status === 'done');
-    const pending = feed?.orders.filter((el: { status: string; }) => el.status === 'pending');
+    const feed = useSelector(store => store.feed.orders)
+    const done = feed?.orders.filter((el) => el.status === 'done');
+    const pending = feed?.orders.filter((el) => el.status === 'pending');
     const { onOpen } = props;
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        console.log('connect')
+        dispatch(wsConnectionSuccess('all'))
+
+        return () => {
+            dispatch(wsConnectionError());
+        };
+    
+    }, [dispatch])
+
 
     return (
         <div className={styles.container}>
@@ -23,7 +34,7 @@ const FeedPage = (props: IBurgerIngredientsProps) => {
                 Лента заказов
             </p>
             <div className={styles.main}>
-                <div className={styles.orders}> {/* Контейнер */}
+                <div className={styles.orders}>
                     {feed ? 
                         feed.orders.map((el: IOrders) => {
                             return(

@@ -1,7 +1,6 @@
 import { useCallback, useEffect } from 'react';
 import styles from './burger-constructor.module.css';
 import { Button, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
-import { useDispatch, useSelector } from 'react-redux';
 import { getOrderNumber } from '../../services/actions/order';
 import { setConstructorIngredients, setConstructorBuns } from '../../services/actions/constructor-ingredients';
 import ConstructorBuns from './constructor-buns';
@@ -15,6 +14,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { SET_CONSTRUCTOR_INGREDIENT } from '../../services/actions/constructor-ingredients';
 import { CLEAR_CONSTRUCTOR } from '../../services/actions/constructor-ingredients';
 import { Redirect, useHistory } from 'react-router-dom';
+import { useDispatch, useSelector } from '../../services/logic/store';
 
 interface IBurgerConstructorProps {
     onOpen: ()=>void;
@@ -26,17 +26,17 @@ const BurgerConstructor = (props: IBurgerConstructorProps) => {
     const history = useHistory();
 
 
-    const user = useSelector((store: RootState) => store.authorization.user);
+    const user = useSelector(store => store.authorization.user);
 
-    const bun = useSelector((store: RootState) => store.constructor.buns);
+    const bun = useSelector(store => store.constructor.buns);
     
-    const amount = useSelector((store: RootState) => store.constructor.amount);
+    const amount = useSelector(store => store.constructor.amount);
 
-    const isCreated = useSelector((store: RootState) => store.order.isCreated);
+    const isCreated = useSelector(store => store.order.isCreated);
     
     const {onOpen} = props;
 
-    const constructorIngredients = useSelector((store: RootState) => store.constructor.ingredientsConstructor)
+    const constructorIngredients = useSelector(store => store.constructor.ingredientsConstructor)
 
     const [{ isHover }, dropTargerRef] = useDrop({
 

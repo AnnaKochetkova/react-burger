@@ -2,10 +2,10 @@ import { EmailInput, PasswordInput, Button, Input } from '@ya.praktikum/react-de
 import styles from './register-page.module.css';
 import { useState, ChangeEvent, FormEvent, useCallback } from 'react';
 import { Link } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../services/logic/rootReducer';
 import { Redirect } from 'react-router-dom';
 import { registrationAccount } from '../services/actions/registration';
+import { useDispatch, useSelector } from '../services/logic/store';
 
 interface StateForm {
     email: string;
@@ -20,8 +20,8 @@ const RegisterPage = () => {
         name: '',
     })
 
-    const registrError = useSelector((store: RootState) => store.registration.accountError);
-    const registrUser = useSelector((store: RootState) => store.registration.user);
+    const registrError = useSelector(store => store.registration.accountError);
+    const registrUser = useSelector(store => store.registration.user);
 
     const dispatch = useDispatch();
 

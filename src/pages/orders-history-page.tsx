@@ -1,11 +1,23 @@
-import { useSelector } from 'react-redux';
-import { IOrders } from '../services/actions/ws-feed';
-import { RootState } from '../services/logic/rootReducer';
+import { useEffect } from 'react';
+import { IOrders, wsConnectionError, wsConnectionSuccess } from '../services/actions/ws-feed';
+import { useDispatch, useSelector } from '../services/logic/store';
+import { getToken } from '../utils/utils';
 import OrdersHistoryOrderPage from './orders-history-order-page';
 import styles from './orders-history-page.module.css';
 
 const OrdersHistoryPage = () => {
-    const history = useSelector((store: RootState) => store.feed.orders)
+    const history = useSelector(store => store.feed.orders)
+    const dispatch = useDispatch();
+    const token = getToken();
+    
+    useEffect(() => {
+        dispatch(wsConnectionSuccess(`?token=${token}`))
+
+        return () => {
+            dispatch(wsConnectionError());
+        };
+    }, [dispatch])
+    
     return (
         <div className={styles.orders}>
             {history ? 

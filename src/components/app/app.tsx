@@ -23,12 +23,12 @@ import OrdersPage from '../../pages/orders-page';
 import FeedOrderPage from '../../pages/feed-order-page';
 import { useLocation, useHistory } from 'react-router-dom';
 import WrapperModalIngredient from '../Ingredient-details/wrapper-modal-ingredient';
-import { useDispatch, useSelector } from 'react-redux';
 import { getIngredients } from '../../services/actions/ingredients';
 import IngredientDetailsPage from '../../pages/ingredient-details-page';
 import WrapperModalFeed from '../feed-details/wrapper-modal-feed';
 import { RootState } from '../../services/logic/rootReducer';
-import { IOrders, WS_CONNECTION_START } from '../../services/actions/ws-feed';
+import { IOrders } from '../../services/actions/ws-feed';
+import { useDispatch } from '../../services/logic/store';
 
 interface ILocationState {
   state: any;
@@ -135,13 +135,6 @@ function App() {
   const onOpenDetailsOrder = (order: IOrders) => {
     setOpenOrderDetails(order);
   }
-
-  useEffect(
-    () => {
-      dispatch({ type: WS_CONNECTION_START });
-    },
-    []
-  );
 
   useEffect(() => {
     dispatch(getIngredients());

@@ -1,6 +1,6 @@
-import { useDispatch } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
 import { AUTHORIZATION_ACCOUNT } from "../services/actions/authorization";
+import { useDispatch } from "../services/logic/store";
 import api from "../utils/api";
 import { setToken } from "../utils/utils";
 import OrdersHistoryPage from "./orders-history-page";

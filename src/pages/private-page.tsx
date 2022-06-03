@@ -2,8 +2,7 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import * as React from 'react';
 import { Route, Redirect, RouteProps, RouteComponentProps } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { RootState } from "../services/logic/rootReducer";
+import { useSelector } from '../services/logic/store';
 // @ts-ignore
 interface PrivateRouteParams extends RouteProps {
     component:
@@ -14,7 +13,7 @@ interface PrivateRouteParams extends RouteProps {
 const PrivatePage = ({
     component: Component,
      ...rest}: PrivateRouteParams) => {
-    const user = useSelector((store: RootState) => store.authorization.user);
+    const user = useSelector(store => store.authorization.user);
 
     return (
         <Route

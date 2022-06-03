@@ -1,41 +1,44 @@
 import { useSelector } from "react-redux";
+import { Middleware, MiddlewareAPI } from "redux";
 import { getToken } from "../../utils/utils";
 import { RootState } from "../logic/rootReducer";
 import { AppDispatch } from "../logic/store";
 
 interface IWsAction {
-    wsInit: string; 
+    // wsInit: string; 
     onOpen: string; 
     onClose: string; 
     onError: string; 
     onOrder: string;
+    onStart: string;
 }
 
-export const socketMiddleware = (wsUrl: string, wsActions: IWsAction) => {
-    return (store: { dispatch: any; getState: any; }) => {
+export const socketMiddleware = (wsUrl: string, wsActions: IWsAction): Middleware => {
+    return (store: MiddlewareAPI<AppDispatch, RootState>) => {
       let socket: WebSocket | null = null;
   
-      return (next: (arg0: any) => void) => (action: { type: any; payload: any; }) => {
-        const { dispatch, getState } = store;
+      return (next) => (action) => {
+        const { dispatch } = store;
         const { type, payload } = action;
-        const { wsInit, onOpen, onClose, onError, onOrder } = wsActions;
-        console.log(getState(), 'getState')
-        const { user } = getState().authorization;
+        const { onOpen, onClose, onError, onOrder, onStart } = wsActions;
         
-        const token = getToken();
-        if(type === wsInit && user) {
-          socket = new WebSocket(`${wsUrl}?token=${token}`);
-        } else if (type === wsInit){
-          socket = new WebSocket(`${wsUrl}/all`);
+        if(type === onStart) {
+          socket = new WebSocket(`${wsUrl}/${payload}`);
         }
-
+        
         if (socket) {
-          socket.onopen = event => {
-            dispatch({ type: onOpen, payload: event });
+          socket.onopen = () => {
+            dispatch({
+              type: onOpen,
+              payload: undefined
+            });
           };
   
-          socket.onerror = event => {
-            dispatch({ type: onError, payload: event });
+          socket.onerror = () => {
+            dispatch({
+              type: onError,
+              payload: undefined
+            });
           };
   
           socket.onmessage = event => {
@@ -46,8 +49,11 @@ export const socketMiddleware = (wsUrl: string, wsActions: IWsAction) => {
             dispatch({ type: onOrder, payload: restParsedData });
           };
   
-          socket.onclose = event => {
-            dispatch({ type: onClose, payload: event });
+          socket.onclose = () => {
+            dispatch({
+              type: onClose,
+              payload: undefined
+            });
           };
         }
   

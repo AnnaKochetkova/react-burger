@@ -1,10 +1,9 @@
 import { EmailInput, PasswordInput, Button, Input } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from './profile-page.module.css';
 import { useState, useCallback, ChangeEvent } from 'react';
-import { RootState } from '../services/logic/rootReducer';
 import api from '../utils/api';
-import { useSelector, useDispatch } from 'react-redux';
 import { AUTHORIZATION_ACCOUNT } from '../services/actions/authorization';
+import { useDispatch, useSelector } from '../services/logic/store';
 
 interface StateAccount {
     email: string;
@@ -14,7 +13,7 @@ interface StateAccount {
 
 const ProfileFormPage = () => {
 
-    const user = useSelector((store: RootState) => store.authorization.user);
+    const user = useSelector(store => store.authorization.user);
 
     const [values, setValues] = useState<StateAccount>({
         email: user?.email ? user.email : '',

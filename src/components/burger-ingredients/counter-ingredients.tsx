@@ -1,13 +1,13 @@
 import { Counter } from '@ya.praktikum/react-developer-burger-ui-components';
-import { useSelector } from 'react-redux';
 import { RootState } from '../../services/logic/rootReducer';
+import { useSelector } from '../../services/logic/store';
 
 interface ICounterProps {
     id: string
 }
 
 export const CounterIngredients = ({id} : ICounterProps) => {
-    const constructorIngredients = useSelector((store: RootState) => store.constructor.ingredientsConstructor) || [] ;
+    const constructorIngredients = useSelector(store => store.constructor.ingredientsConstructor) || [] ;
     
     const count = constructorIngredients.filter(el => el._id === id).length;
 

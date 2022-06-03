@@ -1,10 +1,9 @@
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { IListItemIngredient } from "../components/burger-ingredients/burger-ingredients";
-import { IOrders } from "../services/actions/ws-feed";
-import { RootState } from "../services/logic/rootReducer";
+import { IOrders, wsConnectionError, wsConnectionSuccess, WS_CONNECTION_START } from "../services/actions/ws-feed";
+import { useDispatch, useSelector } from "../services/logic/store";
 import { sayDate } from "../utils/say-date";
 import styles from './feed-order-page.module.css';
 
@@ -15,11 +14,11 @@ interface IParams {
 const FeedOrderPage = () => {
     const [feed, setFeed] = useState<IOrders | undefined>(undefined)
     let params = useParams<IParams>();
-    const feedOrders = useSelector((store: RootState) => store.feed.orders);
-    const ingredients = useSelector((store: RootState) => store.ingredients.ingredients);
+    const feedOrders = useSelector(store => store.feed.orders);
+    const ingredients = useSelector(store => store.ingredients.ingredients);
     const masIngredients = ingredients.filter(el => feed?.ingredients.includes(el._id));
-    const price = masIngredients.reduce((prev: number, curr: IListItemIngredient) => curr.type === 'bun' ? (prev + curr.price * 2) : (prev + curr.price), 0);
-    
+    const price = masIngredients.reduce((prev, curr) => curr.type === 'bun' ? (prev + curr.price * 2) : (prev + curr.price), 0);
+    const dispatch = useDispatch();
     
     let status = '';
     if(feed?.status === 'done'){
@@ -30,10 +29,22 @@ const FeedOrderPage = () => {
         date = sayDate(feed.createdAt)
     }
     useEffect(() => {
-        if (params.numberOrder && feed?.number !== parseInt(params.numberOrder)) {
-            let orders = feedOrders?.orders.find((el: IOrders) => el.number === parseInt(params.numberOrder))
+        dispatch(wsConnectionSuccess('all'))
+        return () => {
+            dispatch(wsConnectionError());
+        };
+    }, [dispatch])
+    useEffect(() => {
+        if (params.numberOrder && feed?.number !== parseInt(params.numberOrder ) && feedOrders !== undefined) {
+            let orders = feedOrders.orders.find((el) => el.number === parseInt(params.numberOrder))
             setFeed(orders);
+            console.log(feed, 'feed')
         }
+        console.log(params.numberOrder !== undefined, 'params.numberOrder')
+        console.log(feed?.number !== parseInt(params.numberOrder ), 'feed?.number !== parseInt(params.numberOrder )');
+        console.log(feedOrders !== undefined, 'feedOrders !== undefined');
+        
+        
         console.log(masIngredients, 'mas')
     }, [params, feedOrders]);
     return (
