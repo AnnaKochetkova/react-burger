@@ -8,10 +8,11 @@ import styles from './orders-history-page.module.css';
 const OrdersHistoryPage = () => {
     const history = useSelector(store => store.feed.orders)
     const dispatch = useDispatch();
-    const token = getToken();
-    const accessToken = token?.token.replace('Bearer ', '');
     
     useEffect(() => {
+        const token = getToken();
+        const accessToken = token?.token.replace('Bearer ', '');
+        
         dispatch(wsConnectionSuccess(`?token=${accessToken}`))
         return () => {
             dispatch(wsConnectionClosed());

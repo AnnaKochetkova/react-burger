@@ -26,7 +26,6 @@ import WrapperModalIngredient from '../Ingredient-details/wrapper-modal-ingredie
 import { getIngredients } from '../../services/actions/ingredients';
 import IngredientDetailsPage from '../../pages/ingredient-details-page';
 import WrapperModalFeed from '../feed-details/wrapper-modal-feed';
-import { RootState } from '../../services/logic/rootReducer';
 import { IOrders } from '../../services/actions/ws-feed';
 import { useDispatch } from '../../services/logic/store';
 

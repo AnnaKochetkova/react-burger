@@ -33,6 +33,10 @@ const WrapperModalFeed = () => {
             setFeed(ingred);
         }
         console.log(feed?.number, 'feed?.number')
+        console.log(params.numberOrder !== undefined, 'params.numberOrder')
+        console.log(feed?.number !== parseInt(params.numberOrder as string), 'feed?.number !== parseInt(params.numberOrder)');
+        console.log(feedOrder !== undefined, 'feedOrder !== undefined');
+        
     }, [params, feedOrder]);
     return (
         <Modal header={<></>} open={feed !== undefined} onClose={handleModalClose}>

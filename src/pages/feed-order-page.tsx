@@ -38,14 +38,7 @@ const FeedOrderPage = () => {
         if (params.numberOrder && feed?.number !== parseInt(params.numberOrder ) && feedOrders !== undefined) {
             let orders = feedOrders.orders.find((el) => el.number === parseInt(params.numberOrder))
             setFeed(orders);
-            console.log(feed, 'feed')
         }
-        console.log(params.numberOrder !== undefined, 'params.numberOrder')
-        console.log(feed?.number !== parseInt(params.numberOrder ), 'feed?.number !== parseInt(params.numberOrder )');
-        console.log(feedOrders !== undefined, 'feedOrders !== undefined');
-        
-        
-        console.log(masIngredients, 'mas')
     }, [params, feedOrders]);
     return (
         <div className={styles.container}>

@@ -44,18 +44,18 @@ export const socketMiddleware = (wsUrl: string, wsActions: IWsAction): Middlewar
           socket.onmessage = event => {
             const { data } = event;
             const parsedData = JSON.parse(data);
-            const { success, ...restParsedData } = parsedData;
-  
-            dispatch({ type: onOrder, payload: restParsedData });
+            
+            dispatch({ type: onOrder, payload: parsedData });
           };
+
+          if (onClose && type === onClose && socket) {
+            socket.close();
+            socket = null;
+          }
   
-          socket.onclose = () => {
-            dispatch({
-              type: onClose,
-              payload: undefined
-            });
-          };
         }
+
+        
   
         next(action);
       };

@@ -20,8 +20,7 @@ const OrdersHistoryOrderPage = (props: IProps) => {
     const renderMas = masIngredients.filter((_, index) => index < 5);
 
     const dispatch = useDispatch();
-    const token = getToken();
-    const accessToken = token?.token.replace('Bearer ', '');
+
 
     let status = '';
     if(props.order.status === 'done'){
@@ -30,12 +29,6 @@ const OrdersHistoryOrderPage = (props: IProps) => {
 
     const date = sayDate(props.order.createdAt)
 
-    useEffect(() => {
-        dispatch(wsConnectionSuccess(`?token=${accessToken}`))
-        return () => {
-            dispatch(wsConnectionClosed());
-        };
-    }, [dispatch])
     return (
         <Link to={{pathname: `/profile/orders/${props.order.number}`, state: { background: location }}} className={styles.order}>
             <div className={`${styles.number}`}>

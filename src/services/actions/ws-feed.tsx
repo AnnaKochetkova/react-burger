@@ -38,6 +38,7 @@ export interface IwsGetOrder {
 
 
 export const wsConnectionSuccess = (wsConnect: string): IwsConnectionSuccess => {
+  console.log('action onStart');
   return {
     type: WS_CONNECTION_SUCCESS,
     payload: wsConnect,
