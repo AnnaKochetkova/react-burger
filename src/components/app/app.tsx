@@ -28,6 +28,7 @@ import IngredientDetailsPage from '../../pages/ingredient-details-page';
 import WrapperModalFeed from '../feed-details/wrapper-modal-feed';
 import { IOrders } from '../../services/actions/ws-feed';
 import { useDispatch } from '../../services/logic/store';
+import HistoryOrderPage from '../../pages/history-order-page';
 
 interface ILocationState {
   state: any;
@@ -64,7 +65,7 @@ function App() {
               </DndProvider>
             </Route>
             <Route path="/feed/:numberOrder" component={()=>(<FeedOrderPage />)}/>
-            <Route path="/profile/orders/:numberOrder" component={()=>(<FeedOrderPage />)}/>
+            <Route path="/profile/orders/:numberOrder" component={()=>(<HistoryOrderPage />)}/>
             <Route path="/ingredients/:ingredientId" component={()=>(<IngredientDetailsPage />)}/>
             <Route
               path='/order'
