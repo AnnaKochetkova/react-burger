@@ -1,13 +1,13 @@
 import styles from './order-details.module.css';
 import orderImage from '../../images/order.png';
-import { useSelector } from 'react-redux';
 import { RootState } from '../../services/logic/rootReducer';
+import { useSelector } from '../../services/logic/store';
 
 const OrderDetails = () => {
     
-    const order = useSelector((store: RootState) => store.order.order);
+    const order = useSelector(store => store.order.order);
     
-    const {orderRequest, orderError} = useSelector((store: RootState) => ({...store.order}))
+    const {orderRequest, orderError} = useSelector(store => ({...store.order}))
     return(
         <>
         {

@@ -1,10 +1,10 @@
 import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
-import { useDispatch } from 'react-redux';
 import { deleteConstructorIngredient } from '../../services/actions/constructor-ingredients';
 import { useRef } from 'react';
 import { useDrop, useDrag } from 'react-dnd';
 import styles from './burger-constructor.module.css';
 import { IListItemIngredient } from '../burger-ingredients/burger-ingredients';
+import { useDispatch } from '../../services/logic/store';
 
 interface IConstructorElementIngredientProps {
     index: number,

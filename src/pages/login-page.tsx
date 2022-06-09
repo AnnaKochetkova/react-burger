@@ -1,12 +1,11 @@
 import { EmailInput, PasswordInput, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useState, ChangeEvent, useCallback, FormEvent, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
 import { authorization } from '../services/actions/authorization';
-import { RootState } from '../services/logic/rootReducer';
 import { Redirect } from 'react-router-dom';
 import styles from './login-page.module.css';
 import { useHistory } from 'react-router-dom';
+import { useDispatch, useSelector } from '../services/logic/store';
 
 interface StateForm {
     email: string;
@@ -21,9 +20,9 @@ const LoginPage = () => {
         name: '',
     });
 
-    const account = useSelector((store: RootState) => store.authorization.user);
+    const account = useSelector(store => store.authorization.user);
 
-    const isCreated = useSelector((store: RootState) => store.order.isCreated);
+    const isCreated = useSelector(store => store.order.isCreated);
     const history = useHistory();
 
     const dispatch = useDispatch();

@@ -24,7 +24,7 @@ export interface IApiOrder {
     number: number,
 }
 
-interface IApiRequestOrder {
+export interface IApiRequestOrder {
     name: string,
     order: IApiOrder,
     success: boolean,

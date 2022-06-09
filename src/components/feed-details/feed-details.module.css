@@ -1,0 +1,76 @@
+.container{
+    width: 640px;
+    height: 680px;
+    margin: auto;
+}
+
+.ingredients{
+    width: 640px;
+    height: 312px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    overflow-y: scroll;
+    scrollbar-width: thin;
+    scrollbar-color: #8585AD #2F2F37;
+}
+
+.ingredients::-webkit-scrollbar{
+    width: 10px;
+}
+
+.ingredients::-webkit-scrollbar-track{
+    background: #2F2F37;
+}
+
+.ingredients::-webkit-scrollbar-thumb{
+    background-color: #8585AD;
+    border-radius: 20px;
+    border: 1px solid #2F2F37;
+}
+
+.totalTime{
+    margin-top: 40px;
+    width: 640px;
+    height: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.total{
+    min-width: 76px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.color{
+    color: #00CCCC;
+}
+
+.containerIngredients{
+    width: 608px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+}
+
+.image{
+    width: 60px;
+    height: 60px;
+    background: #131316;
+    border-radius: 100px;
+    object-fit: cover;
+    border: 2px solid #801AB2;
+}
+
+.name{
+    width: 414px;
+    height: 24px;
+}
+
+.totalContainer{
+    min-width: 150px;
+    display: flex;
+    justify-content: flex-end;
+}

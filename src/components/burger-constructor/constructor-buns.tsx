@@ -1,7 +1,7 @@
-import { useSelector } from 'react-redux';
 import { RootState } from '../../services/logic/rootReducer';
 import { ConstructorElement, BurgerIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import question from '../../images/question.png'
+import { useSelector } from '../../services/logic/store';
 
 interface IConstructorBunsProps {
     typeBun: 'top' | 'bottom',
@@ -10,7 +10,7 @@ interface IConstructorBunsProps {
 
 const ConstructorBuns = (props: IConstructorBunsProps) => {
 
-    const bun = useSelector((store: RootState) => store.constructor.buns)
+    const bun = useSelector(store => store.constructor.buns)
     return (
         <>
         {

@@ -18,11 +18,17 @@ import ProtectedPage from '../../pages/protected-page';
 import Provider from '../../pages/provider';
 import Page404 from '../../pages/page404';
 import PrivatePage from '../../pages/private-page';
+import FeedPage from '../../pages/feed-page';
+import OrdersPage from '../../pages/orders-page';
+import FeedOrderPage from '../../pages/feed-order-page';
 import { useLocation, useHistory } from 'react-router-dom';
 import WrapperModalIngredient from '../Ingredient-details/wrapper-modal-ingredient';
-import { useDispatch } from 'react-redux';
 import { getIngredients } from '../../services/actions/ingredients';
 import IngredientDetailsPage from '../../pages/ingredient-details-page';
+import WrapperModalFeed from '../feed-details/wrapper-modal-feed';
+import { IOrders } from '../../services/actions/ws-feed';
+import { useDispatch } from '../../services/logic/store';
+import HistoryOrderPage from '../../pages/history-order-page';
 
 interface ILocationState {
   state: any;
@@ -51,32 +57,54 @@ function App() {
             <PrivatePage exact path="/forgot-password" component={()=>(<ForgotPasswordPage/>)}/>
             <PrivatePage exact path="/reset-password" component={()=>(<ResetPasswordPage/>)}/>
             <ProtectedPage exact path="/profile" component={()=>(<ProfilePage/>)}/>
-              <Route exact path='/'>
-                <DndProvider backend={HTML5Backend}>
-                  <BurgerIngredients onOpen={onOpenDetails}/>
-                  <BurgerConstructor onOpen={onOpenOrder} />
-                </DndProvider>
-              </Route>
-              <Route path="/ingredients/:ingredientId" component={()=>(<IngredientDetailsPage />)}/>
-              <Route
-                path='/order'
-                children={
-                  <Modal header={<></>} open={openOrder} onClose={handleModalClose}> 
-                    <OrderDetails/>
-                  </Modal>
-                }
-              />
+            <ProtectedPage exact path="/profile/orders" component={()=>(<OrdersPage/>)}/>
+            <Route exact path='/'>
+              <DndProvider backend={HTML5Backend}>
+                <BurgerIngredients onOpen={onOpenDetails}/>
+                <BurgerConstructor onOpen={onOpenOrder} />
+              </DndProvider>
+            </Route>
+            <Route path="/feed/:numberOrder" component={()=>(<FeedOrderPage />)}/>
+            <Route path="/profile/orders/:numberOrder" component={()=>(<HistoryOrderPage />)}/>
+            <Route path="/ingredients/:ingredientId" component={()=>(<IngredientDetailsPage />)}/>
+            <Route
+              path='/order'
+              children={
+                <Modal header={<></>} open={openOrder} onClose={handleModalClose}> 
+                  <OrderDetails/>
+                </Modal>
+              }
+            />
+              
+            <Route exact path='/feed'>
+                <FeedPage onOpen={onOpenDetailsOrder}/>
+            </Route>
             <Route>
               <Page404/>
             </Route>
           </Switch>
           {background && (
-            <Route
-              exact
-              path='/ingredients/:ingredientId'
-            >
-              <WrapperModalIngredient/>
-            </Route>
+            <>
+              <Route
+                exact
+                path='/ingredients/:ingredientId'
+              >
+                <WrapperModalIngredient/>
+              </Route>
+              <Route
+                exact
+                path='/feed/:numberOrder'
+              >
+                <WrapperModalFeed/>
+              </Route>
+              <Route
+                exact
+                path='/profile/orders/:numberOrder'
+              >
+                <WrapperModalFeed/>
+              </Route>
+            </>
+            
           )}
           </main>
       </Provider>
@@ -87,7 +115,9 @@ function App() {
 
   const [openOrder, setOpenOrder] = useState<boolean>(false);
   const [openDetails, setOpenDetails] = useState<IListItemIngredient | undefined>(undefined);
+  const [openOrderDetails, setOpenOrderDetails] = useState<IOrders | undefined>(undefined);
   const dispatch = useDispatch();
+  
 
   const onClose = useCallback(() => {
     setOpenOrder(false);
@@ -102,8 +132,13 @@ function App() {
     setOpenDetails(item);
   }
 
+  const onOpenDetailsOrder = (order: IOrders) => {
+    setOpenOrderDetails(order);
+  }
+
   useEffect(() => {
     dispatch(getIngredients());
+    
   }, []);
 
   return (
