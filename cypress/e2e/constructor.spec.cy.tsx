@@ -37,7 +37,7 @@ describe("Drag and Drop", () => {
       });
 
       cy.contains('Оформить заказ').click();
-      cy.location('pathname').should('eq', '/order')
+      cy.location('pathname').should('eq', '/react-burger/order')
       cy.contains('идентификатор заказа', {timeout: 25000});
 
       cy.get('[data-cy-close="close"]').click();
