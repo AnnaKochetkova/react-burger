@@ -144,7 +144,7 @@ function App() {
   return (
     
     <div className="App">
-        <Router>
+        <Router basename="/react-burger">
             <ModalSwitch/>
         </Router>
     </div>
