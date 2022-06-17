@@ -31,7 +31,7 @@ const Ingredient = (props: IIngredientProps) => {
     })
 
     return (
-        <Link to={{pathname: `/ingredients/${ingredientId}`, state: { background: location }}} ref={dragRef} className={styles.ingredient} onClick={props.onClick} style={{ opacity }} >
+        <Link to={{pathname: `/ingredients/${ingredientId}`, state: { background: location }}} ref={dragRef} className={styles.ingredient} onClick={props.onClick} style={{ opacity }} data-cy='ingredient' >
             {
                 type === 'bun' ? <CounterBuns id={_id}/> : <CounterIngredients id={_id}/>
             }

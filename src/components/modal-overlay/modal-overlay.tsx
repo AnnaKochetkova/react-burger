@@ -6,7 +6,7 @@ export interface IModalOverlayProps {
 
 const ModalOverlay = (props: IModalOverlayProps) => {
     return(
-        <div className={styles.overlay} onClick={props.onClose}/>
+        <div className={styles.overlay} onClick={props.onClose} />
     )
 }
 

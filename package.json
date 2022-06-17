@@ -2,6 +2,7 @@
   "name": "react-burger",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://annakochetkova.github.io/react-burger/",
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.1",
     "@testing-library/jest-dom": "5.11.4",
@@ -34,12 +35,17 @@
     "start": "react-scripts --openssl-legacy-provider start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "yarn run build",
+    "deploy": "gh-pages -d build",
+    "cypress:open": "./node_modules/.bin/cypress open",
+    "deploy-script": "yarn run build && scp -r ./build/* annavm@130.193.55.224:/home/annavm/stellar-frontend"
   },
   "eslintConfig": {
     "extends": [
       "react-app",
-      "react-app/jest"
+      "react-app/jest",
+      "plugin:cypress/recommended"
     ]
   },
   "browserslist": {
@@ -55,6 +61,12 @@
     ]
   },
   "devDependencies": {
-    "@types/uuid": "^8.3.4"
+    "@4tw/cypress-drag-drop": "^2.2.0",
+    "@types/uuid": "^8.3.4",
+    "cypress": "^10.1.0",
+    "eslint-plugin-cypress": "^2.12.1",
+    "fetch-mock": "^9.11.0",
+    "gh-pages": "^4.0.0",
+    "redux-mock-store": "^1.5.4"
   }
 }
