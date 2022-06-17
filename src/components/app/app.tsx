@@ -32,7 +32,7 @@ import HistoryOrderPage from '../../pages/history-order-page';
 
 interface ILocationState {
   state: any;
-  background: string | undefined
+  background: string | undefined;
 }
 
 function App() {
