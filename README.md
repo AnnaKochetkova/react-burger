@@ -1,6 +1,10 @@
+# Stellar Burger
+
 # About application 
 
 The application is used to place orders for burgers, where you can create your own unique burger and place an order. Also in the application, you can see the history of all your orders, and you can also find out all the data about the ingredient.
+
+Also in the application there is the possibility of registration and authorization, password recovery.
 
 You can open this application by clicking on the link: 'https://annakochetkova.github.io/react-burger/'.
 
@@ -8,7 +12,7 @@ You can open this application by clicking on the link: 'https://annakochetkova.g
 
 # Technology
 
-When writing this application, technologies such as: React, Redux, TypeScript.
+When writing this application, technologies such as: React, Redux, TypeScript, HTML, CSS, WebSocket, React router.
 The application has also been tested with Cypress and unit tests.
 
 # Start application
