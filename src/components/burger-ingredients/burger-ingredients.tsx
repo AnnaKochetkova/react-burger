@@ -8,7 +8,7 @@ import { useSelector } from '../../services/logic/store';
 
 
 export interface IListItemIngredient {
-    type: 'bun' | 'sause' | 'main';
+    type: string; //'bun' | 'sause' | 'main'
     _id: string;
     name: string;
     image: string;

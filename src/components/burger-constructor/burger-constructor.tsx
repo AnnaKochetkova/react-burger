@@ -120,10 +120,10 @@ const BurgerConstructor = (props: IBurgerConstructorProps) => {
     return (
         <div className={styles.container}>
             <div className={styles.wrapper} >
-                <div className={`ml-8 ${styles.bun} ${isOver ? styles.hoverBun : ''}`} ref={dropTargerBunRef}>
-                    <ConstructorBuns typeBun="top" typeText='(верх)'/>
+                <div className={`ml-8 ${styles.bun} ${isOver ? styles.hoverBun : ''}`} ref={dropTargerBunRef} data-cy="bun">
+                    <ConstructorBuns typeBun="top" typeText='(верх)' />
                 </div>
-                <div className={`${styles.ingredients} ${isHover ? styles.hover : ''}`} ref={dropTargerRef}>
+                <div className={`${styles.ingredients} ${isHover ? styles.hover : ''}`} ref={dropTargerRef} data-cy="ingredientconstructor">
                     {
                     constructorIngredients && 
                         constructorIngredients.map((el, index) => {
@@ -145,7 +145,7 @@ const BurgerConstructor = (props: IBurgerConstructorProps) => {
                     }
                     <CurrencyIcon type="primary" />
                 </span>
-                <Button type="primary" size="large" onClick={handleCreateOrder} >
+                <Button type="primary" size="large" onClick={handleCreateOrder}>
                     Оформить заказ
                 </Button>
             </div>

@@ -11,7 +11,7 @@ const ModalHeader = (props: IModalHeaderProps) => {
         <div className={styles.modalHeader}>
             <div className={`ml-10 mt-10 mr-10 text text_type_main-medium ${styles.headerContent}`}>
                 {props.children}
-                <button className={styles.button} onClick={props.onClose}>
+                <button className={styles.button} onClick={props.onClose} data-cy-close='close'>
                     <CloseIcon type="primary" />
                 </button>
             </div>

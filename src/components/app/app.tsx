@@ -32,7 +32,7 @@ import HistoryOrderPage from '../../pages/history-order-page';
 
 interface ILocationState {
   state: any;
-  background: string | undefined
+  background: string | undefined;
 }
 
 function App() {
@@ -144,7 +144,7 @@ function App() {
   return (
     
     <div className="App">
-        <Router>
+        <Router basename='/react-burger'>
             <ModalSwitch/>
         </Router>
     </div>

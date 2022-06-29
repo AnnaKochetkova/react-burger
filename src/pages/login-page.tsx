@@ -1,4 +1,4 @@
-import { EmailInput, PasswordInput, Button } from '@ya.praktikum/react-developer-burger-ui-components';
+import { EmailInput, PasswordInput, Button, Input } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useState, ChangeEvent, useCallback, FormEvent, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { authorization } from '../services/actions/authorization';
@@ -54,8 +54,8 @@ const LoginPage = () => {
         <div className={styles.container}>
             <form className={styles.inputContainer} onSubmit={onSubmitForm}>
                 <p className="text text_type_main-medium">Вход</p>
-                <EmailInput size={undefined} onChange={onChangeForm} value={values.email} name={'email'} />
-                <PasswordInput onChange={onChangeForm} value={values.password} name={'password'} />
+                <Input size={undefined} onChange={onChangeForm} placeholder={'Email'} value={values.email} name={'email'} data-cy='email'/>
+                <PasswordInput onChange={onChangeForm} value={values.password} name={'password'} data-cy='password'/>
                 <Button type="primary" size="medium">
                     Войти
                 </Button>
