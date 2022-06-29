@@ -4,6 +4,8 @@ The application is used to place orders for burgers, where you can create your o
 
 You can open this application by clicking on the link: 'https://annakochetkova.github.io/react-burger/'.
 
+![1](https://user-images.githubusercontent.com/97451001/176376882-ab181ac1-d335-4fbb-8670-48e03c1e5d51.png)
+
 # Technology
 
 When writing this application, technologies such as: React, Redux, TypeScript.
